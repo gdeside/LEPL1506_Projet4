@@ -82,7 +82,6 @@ for name in names:
             ipk = pk[0]  # index
             cycle_starts = ipk[:-1]
             cycle_ends = ipk[1:] - 1
-            print(len(cycle_starts))
             if len(cycle_starts) == 0:
                 continue
 
@@ -90,26 +89,34 @@ for name in names:
             ax1.plot(time1, pos[0])
             ax1.set_xlim(time1[cycle_starts[3]], time1[cycle_ends[3]])
             ax1.set_ylabel("x[m]")
-            ax1.set_xlabel("time[s]")
+            ax1.set_title('position x')
+            plt.setp(ax1.get_xticklabels(), visible=False)
 
             ax2.plot(time1, pos[1])
             ax2.set_xlim(time1[cycle_starts[3]],time1[cycle_ends[3]])
 
             # ax1.set_ylim(-0.80, -0.20)
-            ax2.set_title('positions z')
-
+            ax2.set_title('positions y')
+            ax2.set_ylabel("y[m]")
+            plt.setp(ax2.get_xticklabels(), visible=False)
             ax3.plot(time1, vel[0])
             ax3.set_title('velocity')
+            ax3.set_ylabel("v[m/s]")
             ax3.set_xlim(time1[cycle_starts[3]], time1[cycle_ends[3]])
+            plt.setp(ax3.get_xticklabels(), visible=False)
             ax4.plot(time, accX)
+            plt.setp(ax4.get_xticklabels(), visible=False)
             ax4.set_title('accelaration')
+            ax4.set_ylabel("a[m/s]")
+
             ax4.set_xlim(time1[cycle_starts[3]], time1[cycle_ends[3]])
             ax5.plot(time, GF, label="GF")
             ax5.set_title('GF and LF')
             ax5.plot(time, LF, label="LF")
+            ax5.set_ylabel("GF et LF [N]")
             ax5.set_xlim(time1[cycle_starts[3]], time1[cycle_ends[3]])
             ax5.legend()
-            # ax4.set_ylim(0, 20)
+            ax5.set_xlabel('time[s]')
 
             namefile = "%s_1mvt_%s_%d" % (name, p, n)
             fig.suptitle(namefile)

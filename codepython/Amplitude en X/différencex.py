@@ -60,6 +60,8 @@ for name in names:
                 ecart.append(abs(np.nanmax(pos[0][cycle_starts[k]:cycle_ends[k]])-np.nanmin(pos[0][cycle_starts[k]:cycle_ends[k]])))
             axs[a].plot(index, ecart)
             axs[a].set_title("%s %s %d" % (name, p, n))
+            axs[a].set_ylabel("amplitude[m]")
+            axs[a].set_ylim(0.20,0.55)
             a += 1
     plt.suptitle("difference en x pour %s"%name)
     plt.savefig("diffrence_en_x_for_%s.png" % name)
