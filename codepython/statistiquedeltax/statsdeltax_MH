@@ -1,0 +1,75 @@
+Stats DeltaX pour MH en position UR et les essais 2 et 3
+p_value pour la variance 0.950476 
+les deux variances sont 0.018814 et 0.018530
+                          Test for equality of means                          
+==============================================================================
+                 coef    std err          t      P>|t|      [0.025      0.975]
+------------------------------------------------------------------------------
+subset #1     -0.0190      0.008     -2.437      0.023      -0.035      -0.003
+==============================================================================
+les deux moyennes sont: 0.401480 et 0.420465
+
+
+Stats DeltaX pour MH en position UR et les essais 3 et 4
+p_value pour la variance nan 
+les deux variances sont 0.018530 et nan
+                          Test for equality of means                          
+==============================================================================
+                 coef    std err          t      P>|t|      [0.025      0.975]
+------------------------------------------------------------------------------
+subset #1         nan        inf        nan        nan         nan         nan
+==============================================================================
+les deux moyennes sont: 0.420465 et nan
+
+
+Stats DeltaX pour MH en position UR et les essais 4 et 5
+p_value pour la variance nan 
+les deux variances sont nan et 0.022831
+                          Test for equality of means                          
+==============================================================================
+                 coef    std err          t      P>|t|      [0.025      0.975]
+------------------------------------------------------------------------------
+subset #1         nan        inf        nan        nan         nan         nan
+==============================================================================
+les deux moyennes sont: nan et 0.429556
+
+
+Stats DeltaX pour MH en position SP et les essais 2 et 3
+p_value pour la variance 0.346185 
+les deux variances sont 0.020063 et 0.026482
+                          Test for equality of means                          
+==============================================================================
+                 coef    std err          t      P>|t|      [0.025      0.975]
+------------------------------------------------------------------------------
+subset #1      0.0047      0.009      0.495      0.625      -0.015       0.024
+==============================================================================
+les deux moyennes sont: 0.467224 et 0.462544
+
+
+Stats DeltaX pour MH en position SP et les essais 3 et 4
+p_value pour la variance 0.497535 
+les deux variances sont 0.026482 et 0.021682
+                          Test for equality of means                          
+==============================================================================
+                 coef    std err          t      P>|t|      [0.025      0.975]
+------------------------------------------------------------------------------
+subset #1      0.0104      0.010      1.065      0.297      -0.010       0.030
+==============================================================================
+les deux moyennes sont: 0.462544 et 0.452194
+
+
+Stats DeltaX pour MH en position SP et les essais 4 et 5
+p_value pour la variance 0.293666 
+les deux variances sont 0.021682 et 0.029775
+                          Test for equality of means                          
+==============================================================================
+                 coef    std err          t      P>|t|      [0.025      0.975]
+------------------------------------------------------------------------------
+subset #1      0.0139      0.011      1.262      0.220      -0.009       0.037
+==============================================================================
+les deux moyennes sont: 0.452194 et 0.438312
+
+
+Stats DeltaX pour MH en position UD et les essais 2 et 3
+Stats DeltaX pour MH en position UD et les essais 3 et 4
+Stats DeltaX pour MH en position UD et les essais 4 et 5
