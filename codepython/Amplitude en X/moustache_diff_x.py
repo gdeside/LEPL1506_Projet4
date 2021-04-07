@@ -50,6 +50,10 @@ for name in names:
             patch.set_facecolor(color)
         ax.legend([boxplot["boxes"][0],boxplot["boxes"][1],boxplot["boxes"][3]], ['train', 'no blind','blind'], loc='upper right')
         ax.set_title("%s"%p)
+        ax.set_ylim(0.24,0.55)
+        ax.set_ylabel("Amplitude mvt [m]")
+        if p=='UD':
+            ax.set_xlabel('essais')
         for i in ntrials:
             index=i*np.ones(len(box[i-1]))
             ax.scatter(index,box[i-1],alpha=0.6,color=colors[i-1])

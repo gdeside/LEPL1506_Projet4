@@ -46,7 +46,7 @@ for name in names:
                         pos[0][cycle_starts[k]:cycle_ends[k]])))
                     ecarty=(abs(np.nanmax(pos[1][cycle_starts[k]:cycle_ends[k]]) - np.nanmin(
                         pos[1][cycle_starts[k]:cycle_ends[k]])))
-                    angle.append(90-np.arctan(ecarty/ecartx))
+                    angle.append(90-np.degrees(np.arctan(ecarty/ecartx)))
 
                 box.append(angle)
         boxplot=ax.boxplot(box, notch=False,vert=True,medianprops={'color':'purple'}, patch_artist=True, showfliers=False)
@@ -54,5 +54,9 @@ for name in names:
             patch.set_facecolor(color)
         ax.legend([boxplot["boxes"][0],boxplot["boxes"][1],boxplot["boxes"][3]], ['train', 'no blind','blind'], loc='upper right')
         ax.set_title("%s"%p)
+        ax.set_ylabel('angle[degrees]')
+        ax.set_ylim(75,90)
+        if p=='UD':
+            ax.set_xlabel('essais')
     fig.suptitle("evolution angle %s" % name)
     plt.savefig("box_angle_for_%s.png" % name)
