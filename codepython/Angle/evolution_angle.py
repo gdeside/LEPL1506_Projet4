@@ -11,7 +11,17 @@ from os import path
 
 import coda_tools as coda
 import processing_tools as tool
-
+sujet = {
+  "GD": "Sujet 1",
+  "LH": "Sujet 3",
+  "PDs": "Sujet 2",
+    "MH": "Sujet 4"
+}
+positionsdico={
+    "SP": "Supine",
+    "UD":"UpsidDowm",
+    "UR":"UpRight"
+}
 ntrials = [1, 2, 3, 4, 5]  # /!\ changer noms de fichiers
 positions = ['UR', 'SP', 'UD']
 names = ['LH', 'GD', 'PDs', 'MH']
@@ -53,10 +63,10 @@ for name in names:
         for patch, color in zip(boxplot['boxes'], colors):
             patch.set_facecolor(color)
         ax.legend([boxplot["boxes"][0],boxplot["boxes"][1],boxplot["boxes"][3]], ['train', 'no blind','blind'], loc='upper right')
-        ax.set_title("%s"%p)
+        ax.set_title("%s"%positionsdico[p])
         ax.set_ylabel('angle[degrees]')
         ax.set_ylim(75,90)
         if p=='UD':
             ax.set_xlabel('essais')
-    fig.suptitle("evolution angle %s" % name)
+    fig.suptitle("evolution angle %s" % sujet[name])
     plt.savefig("box_angle_for_%s.png" % name)

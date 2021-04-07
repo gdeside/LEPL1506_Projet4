@@ -67,11 +67,11 @@ for name in names:
             ecart=[]
             for k in range(len(cycle_starts)):
                 index.append(k)
-                ecart.append(abs(np.nanmax(pos[0][cycle_starts[k]:cycle_ends[k]])-np.nanmin(pos[0][cycle_starts[k]:cycle_ends[k]])))
+                ecart.append(abs(np.nanmax(pos[1][cycle_starts[k]:cycle_ends[k]])-np.nanmin(pos[1][cycle_starts[k]:cycle_ends[k]])))
             axs[a].plot(index, ecart)
             axs[a].set_title("%s %s %d" % (name, p, n))
-            axs[a].set_ylabel("amplitude[m]")
-            axs[a].set_ylim(0.20,0.55)
+            axs[a].set_ylabel("amplitude en y[m]")
+            axs[a].set_ylim(0.0,0.15)
             a += 1
-    plt.suptitle("difference en x pour %s"%name)
-    plt.savefig("diffrence_en_x_for_%s.png" % name)
+    plt.suptitle("difference en y pour %s"%name)
+    plt.savefig("diffrence_en_y_for_%s.png" % name)

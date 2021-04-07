@@ -15,17 +15,7 @@ import processing_tools as tool
 ntrials = [1, 2, 3, 4, 5]  # /!\ changer noms de fichiers
 positions = ['UR', 'SP', 'UD']
 names = ['LH', 'GD', 'PDs', 'MH']
-sujet = {
-  "GD": "Sujet 1",
-  "LH": "Sujet 3",
-  "PDs": "Sujet 2",
-    "MH": "Sujet 4"
-}
-positionsdico={
-    "SP": "Supine",
-    "UD":"UpsidDowm",
-    "UR":"UpRight"
-}
+
 
 def trim_axs(axs, N):
     """
@@ -67,11 +57,11 @@ for name in names:
             ecart=[]
             for k in range(len(cycle_starts)):
                 index.append(k)
-                ecart.append(abs(np.nanmax(pos[0][cycle_starts[k]:cycle_ends[k]])-np.nanmin(pos[0][cycle_starts[k]:cycle_ends[k]])))
+                ecart.append(abs(np.nanmax(pos[2][cycle_starts[k]:cycle_ends[k]])-np.nanmin(pos[2][cycle_starts[k]:cycle_ends[k]])))
             axs[a].plot(index, ecart)
             axs[a].set_title("%s %s %d" % (name, p, n))
-            axs[a].set_ylabel("amplitude[m]")
-            axs[a].set_ylim(0.20,0.55)
+            axs[a].set_ylabel("amplitude en z[m]")
+            axs[a].set_ylim(0.0,0.15)
             a += 1
-    plt.suptitle("difference en x pour %s"%name)
-    plt.savefig("diffrence_en_x_for_%s.png" % name)
+    plt.suptitle("difference en z pour %s"%name)
+    plt.savefig("diffrence_en_z_for_%s.png" % name)

@@ -16,17 +16,6 @@ ntrials = [1, 2, 3, 4, 5]  # /!\ changer noms de fichiers
 positions = ['UR', 'SP', 'UD']
 names = ['LH', 'GD', 'PDs', 'MH']
 colors = ['plum', 'aquamarine', 'aquamarine', 'royalblue', 'royalblue']
-sujet = {
-  "GD": "Sujet 1",
-  "LH": "Sujet 3",
-  "PDs": "Sujet 2",
-    "MH": "Sujet 4"
-}
-positionsdico={
-    "SP": "Supine",
-    "UD":"UpsidDowm",
-    "UR":"UpRight"
-}
 
 for name in names:
     fig, (ax1, ax2, ax3) = plt.subplots(nrows=3, ncols=1, figsize=(15, 10))
@@ -53,20 +42,20 @@ for name in names:
 
                 ecart = []
                 for k in range(len(cycle_starts)):
-                    ecart.append(abs(np.nanmax(pos[0][cycle_starts[k]:cycle_ends[k]]) - np.nanmin(
-                        pos[0][cycle_starts[k]:cycle_ends[k]])))
+                    ecart.append(abs(np.nanmax(pos[2][cycle_starts[k]:cycle_ends[k]]) - np.nanmin(
+                        pos[2][cycle_starts[k]:cycle_ends[k]])))
                 box.append(ecart)
         boxplot=ax.boxplot(box, notch=False,vert=True,medianprops={'color':'purple'}, patch_artist=True, showfliers=False)
         for patch, color in zip(boxplot['boxes'], colors):
             patch.set_facecolor(color)
         ax.legend([boxplot["boxes"][0],boxplot["boxes"][1],boxplot["boxes"][3]], ['train', 'no blind','blind'], loc='upper right')
         ax.set_title("%s"%p)
-        ax.set_ylim(0.24,0.55)
-        ax.set_ylabel("Amplitude mvt [m]")
+        ax.set_ylabel("Amplitude z [m]")
+        ax.set_ylim(0.0,0.15)
         if p=='UD':
             ax.set_xlabel('essais')
         for i in ntrials:
             index=i*np.ones(len(box[i-1]))
             ax.scatter(index,box[i-1],alpha=0.6,color=colors[i-1])
-    fig.suptitle("amplitude boxplot %s" % name)
-    plt.savefig("box_diffrence_en_x_for_%s.png" % name)
+    fig.suptitle("amplitude y boxplot %s" % name)
+    plt.savefig("box_diffrence_en_z_for_%s.png" % name)
