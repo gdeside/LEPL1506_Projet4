@@ -14,7 +14,7 @@ import processing_tools as tool
 
 ntrials = 5  # /!\ changer noms de fichiers
 positions = ["UR", 'SP', 'UD']
-names = ['PDS']
+names = ['PDS','GD','LH','MH']
 
 for name in names:
     for p in positions:
@@ -85,7 +85,7 @@ for name in names:
             if len(cycle_starts) == 0:
                 continue
 
-            fig, (ax1, ax2, ax3, ax4, ax5) = plt.subplots(5, figsize=(15, 15))
+            fig, (ax1, ax2, ax3, ax4, ax5,ax6) = plt.subplots(6, figsize=(20, 20))
             ax1.plot(time1, pos[0])
             ax1.set_ylabel("x[m]")
             ax1.set_title('positions x')
@@ -98,22 +98,24 @@ for name in names:
             ax2.set_title('positions y')
             ax2.set_ylabel("y[m]")
             plt.setp(ax2.get_xticklabels(), visible=False)
-
-            ax3.plot(time1, vel[0])
-            ax3.set_title('velocity')
-            ax3.set_ylabel("v[m/s]")
+            ax3.plot(time1, pos[2])
+            ax3.set_title('positions z')
+            ax3.set_ylabel("z[m]")
             plt.setp(ax3.get_xticklabels(), visible=False)
-            ax4.plot(time, accX)
-            ax4.set_title('accelaration')
-            ax4.set_ylabel("a[m/s²]")
+            ax4.plot(time1, vel[0])
+            ax4.set_title('velocity')
+            ax4.set_ylabel("v[m/s]")
+            plt.setp(ax3.get_xticklabels(), visible=False)
+            ax5.plot(time, accX)
+            ax5.set_title('accelaration')
+            ax5.set_ylabel("a[m/s²]")
             plt.setp(ax4.get_xticklabels(), visible=False)
-            ax5.plot(time, GF, label="GF")
-            ax5.set_title('GF and LF')
-            ax5.plot(time, LF, label="LF")
-            ax5.legend()
-            ax5.set_xlabel("time[s]")
+            ax6.plot(time, GF, label="GF")
+            ax6.set_title('GF and LF')
+            ax6.plot(time, LF, label="LF")
+            ax6.legend()
+            ax6.set_xlabel("time[s]")
             # ax4.set_ylim(0, 20)
             namefile = "%s_%s_%d" % (name, p, n)
             fig.suptitle(namefile)
-            print(namefile)
             plt.savefig("%s.png" % namefile)
