@@ -89,6 +89,10 @@ for name in names:
             ax1.plot(time1, pos[0])
             ax1.set_ylabel("x[m]")
             ax1.set_title('positions x')
+            for i in range(0, len(cycle_starts)):
+                rect0 = plt.Rectangle((time1[cycle_starts[i]], ax1.get_ylim()[0]),
+                                      time1[cycle_ends[i] - cycle_starts[i]], ax1.get_ylim()[1] - ax1.get_ylim()[0], color='k', alpha=0.3)
+                ax1.add_patch(rect0)
             plt.setp(ax1.get_xticklabels(), visible=False)
 
             ax2.plot(time1, pos[1])
@@ -97,10 +101,18 @@ for name in names:
             # ax1.set_ylim(-0.80, -0.20)
             ax2.set_title('positions y')
             ax2.set_ylabel("y[m]")
+            for i in range(0, len(cycle_starts)):
+                rect0 = plt.Rectangle((time1[cycle_starts[i]], ax2.get_ylim()[0]),
+                                      time1[cycle_ends[i] - cycle_starts[i]], ax2.get_ylim()[1] - ax2.get_ylim()[0], color='k', alpha=0.3)
+                ax2.add_patch(rect0)
             plt.setp(ax2.get_xticklabels(), visible=False)
             ax3.plot(time1, pos[2])
             ax3.set_title('positions z')
             ax3.set_ylabel("z[m]")
+            for i in range(0, len(cycle_starts)):
+                rect0 = plt.Rectangle((time1[cycle_starts[i]], ax3.get_ylim()[0]),
+                                      time1[cycle_ends[i] - cycle_starts[i]], ax3.get_ylim()[1] - ax3.get_ylim()[0], color='k', alpha=0.3)
+                ax3.add_patch(rect0)
             plt.setp(ax3.get_xticklabels(), visible=False)
             ax4.plot(time1, vel[0])
             ax4.set_title('velocity')
