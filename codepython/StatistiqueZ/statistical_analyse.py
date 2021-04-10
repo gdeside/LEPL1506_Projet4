@@ -1,14 +1,9 @@
+from os import path
+
 import numpy as np
-import matplotlib.pyplot as plt
-import math
 import statsmodels.stats.weightstats as sm2
 from scipy import signal
 from scipy import stats as sc
-
-import glm_data_processing as glm
-import get_mu_points as gmp
-import get_mu_fit as gmf
-from os import path
 
 import coda_tools as coda
 import processing_tools as tool
@@ -24,11 +19,11 @@ positionsdico = {
     "UR": "UpRight"
 }
 for name in names:
-    file1 = open("statsdeltax_%s" % name, "w")
+    file1 = open("statsdeltaz_%s" % name, "w")
     for p in positions:
         file1.write("######################## Position {} ###############################################\n".format(positionsdico[p]))
         for n in ntrials:
-            file1.write("Stats DeltaX pour %s en position %s et les essais %d et %d\n"%(name,p,n,n+1))
+            file1.write("Stats DeltaZ pour %s en position %s et les essais %d et %d\n"%(name,p,n,n+1))
             file_path1 = "../../data/Groupe_1_codas/%s_%s_coda000%d.txt" % (name, p, n)
             if not path.exists(file_path1):
                 continue
@@ -45,8 +40,8 @@ for name in names:
 
             ecart1 = []
             for k in range(len(cycle_starts)):
-                ecart1.append(abs(np.nanmax(pos1[0][cycle_starts[k]:cycle_ends[k]]) - np.nanmin(
-                    pos1[0][cycle_starts[k]:cycle_ends[k]])))
+                ecart1.append(abs(np.nanmax(pos1[2][cycle_starts[k]:cycle_ends[k]]) - np.nanmin(
+                    pos1[2][cycle_starts[k]:cycle_ends[k]])))
 
             # seconde file
             file_path2 = "../../data/Groupe_1_codas/%s_%s_coda000%d.txt" % (name, p, n + 1)
@@ -64,8 +59,8 @@ for name in names:
 
             ecart2 = []
             for k in range(len(cycle_starts)):
-                ecart2.append(abs(np.nanmax(pos2[0][cycle_starts[k]:cycle_ends[k]]) - np.nanmin(
-                    pos2[0][cycle_starts[k]:cycle_ends[k]])))
+                ecart2.append(abs(np.nanmax(pos2[2][cycle_starts[k]:cycle_ends[k]]) - np.nanmin(
+                    pos2[2][cycle_starts[k]:cycle_ends[k]])))
 
             Txbis, pvalbis = sc.bartlett(ecart1, ecart2)
             file1.write("p_value pour la variance %f \n" % pvalbis)

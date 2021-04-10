@@ -1,78 +1,78 @@
 ######################## Position UpRight ###############################################
-Stats DeltaX pour MH en position UR et les essais 2 et 3
-p_value pour la variance 0.950476 
-les deux variances sont 0.018814 et 0.018530
+Stats DeltaZ pour MH en position UR et les essais 2 et 3
+p_value pour la variance 0.377766 
+les deux variances sont 0.004053 et 0.005321
                           Test for equality of means                          
 ==============================================================================
                  coef    std err          t      P>|t|      [0.025      0.975]
 ------------------------------------------------------------------------------
-subset #1     -0.0190      0.008     -2.437      0.023      -0.035      -0.003
+subset #1     -0.0084      0.002     -4.235      0.000      -0.013      -0.004
 ==============================================================================
-les deux moyennes sont: 0.401480 et 0.420465
+les deux moyennes sont: 0.026139 et 0.034544
 
 
-Stats DeltaX pour MH en position UR et les essais 3 et 4
+Stats DeltaZ pour MH en position UR et les essais 3 et 4
 p_value pour la variance nan 
-les deux variances sont 0.018530 et nan
+les deux variances sont 0.005321 et nan
                           Test for equality of means                          
 ==============================================================================
                  coef    std err          t      P>|t|      [0.025      0.975]
 ------------------------------------------------------------------------------
 subset #1         nan        inf        nan        nan         nan         nan
 ==============================================================================
-les deux moyennes sont: 0.420465 et nan
+les deux moyennes sont: 0.034544 et nan
 
 
-Stats DeltaX pour MH en position UR et les essais 4 et 5
+Stats DeltaZ pour MH en position UR et les essais 4 et 5
 p_value pour la variance nan 
-les deux variances sont nan et 0.022831
+les deux variances sont nan et 0.006159
                           Test for equality of means                          
 ==============================================================================
                  coef    std err          t      P>|t|      [0.025      0.975]
 ------------------------------------------------------------------------------
 subset #1         nan        inf        nan        nan         nan         nan
 ==============================================================================
-les deux moyennes sont: nan et 0.429556
+les deux moyennes sont: nan et 0.035940
 
 
 ######################## Position Supine ###############################################
-Stats DeltaX pour MH en position SP et les essais 2 et 3
-p_value pour la variance 0.346185 
-les deux variances sont 0.020063 et 0.026482
+Stats DeltaZ pour MH en position SP et les essais 2 et 3
+p_value pour la variance 0.959876 
+les deux variances sont 0.006887 et 0.006808
                           Test for equality of means                          
 ==============================================================================
                  coef    std err          t      P>|t|      [0.025      0.975]
 ------------------------------------------------------------------------------
-subset #1      0.0047      0.009      0.495      0.625      -0.015       0.024
+subset #1     -0.0036      0.003     -1.307      0.203      -0.009       0.002
 ==============================================================================
-les deux moyennes sont: 0.467224 et 0.462544
+les deux moyennes sont: 0.046368 et 0.049949
 
 
-Stats DeltaX pour MH en position SP et les essais 3 et 4
-p_value pour la variance 0.497535 
-les deux variances sont 0.026482 et 0.021682
+Stats DeltaZ pour MH en position SP et les essais 3 et 4
+p_value pour la variance 0.026875 
+les deux variances sont 0.006808 et 0.013070
                           Test for equality of means                          
 ==============================================================================
                  coef    std err          t      P>|t|      [0.025      0.975]
 ------------------------------------------------------------------------------
-subset #1      0.0104      0.010      1.065      0.297      -0.010       0.030
+subset #1      0.0051      0.004      1.236      0.228      -0.003       0.014
 ==============================================================================
-les deux moyennes sont: 0.462544 et 0.452194
+les deux moyennes sont: 0.049949 et 0.044851
 
 
-Stats DeltaX pour MH en position SP et les essais 4 et 5
-p_value pour la variance 0.293666 
-les deux variances sont 0.021682 et 0.029775
+Stats DeltaZ pour MH en position SP et les essais 4 et 5
+p_value pour la variance 0.324578 
+les deux variances sont 0.013070 et 0.009511
                           Test for equality of means                          
 ==============================================================================
                  coef    std err          t      P>|t|      [0.025      0.975]
 ------------------------------------------------------------------------------
-subset #1      0.0139      0.011      1.262      0.220      -0.009       0.037
+subset #1     -0.0006      0.005     -0.114      0.910      -0.011       0.010
 ==============================================================================
-les deux moyennes sont: 0.452194 et 0.438312
+les deux moyennes sont: 0.044851 et 0.045414
 
 
 ######################## Position UpsidDowm ###############################################
-Stats DeltaX pour MH en position UD et les essais 2 et 3
-Stats DeltaX pour MH en position UD et les essais 3 et 4
-Stats DeltaX pour MH en position UD et les essais 4 et 5
+Stats DeltaZ pour MH en position UD et les essais 2 et 3
+Stats DeltaZ pour MH en position UD et les essais 3 et 4
+Stats DeltaZ pour MH en position UD et les essais 4 et 5

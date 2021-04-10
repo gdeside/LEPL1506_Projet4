@@ -65,7 +65,7 @@ for name in names:
         ax.legend([boxplot["boxes"][0],boxplot["boxes"][1],boxplot["boxes"][3]], ['train', 'no blind','blind'], loc='upper right')
         ax.set_title("%s"%positionsdico[p])
         ax.set_ylabel('angle[degrees]')
-        ax.set_ylim(75,90)
+        ax.set_ylim(70,90)
         if p=='UD':
             ax.set_xlabel('essais')
     fig.suptitle("evolution angle %s" % sujet[name])

@@ -157,6 +157,18 @@ positions = ["UR", 'SP', 'UD']
 names = ['GD', 'PDs', 'LH', 'MH']
 colors = ['cyan', 'violet', 'orchid', 'tomato', 'yellow', 'yellowgreen', 'mintcream', 'mistyrose', 'moccasin',
           'navajowhite', 'navy', 'indianred','indigo','ivory','khaki','lavender']
+
+sujet = {
+  "GD": "Sujet 1",
+  "LH": "Sujet 3",
+  "PDs": "Sujet 2",
+    "MH": "Sujet 4"
+}
+positionsdico={
+    "SP": "Supine",
+    "UD":"UpsidDowm",
+    "UR":"UpRight"
+}
 for name in names:
     for p in positions:
         for n in range(1, ntrials + 1):
@@ -184,9 +196,9 @@ for name in names:
                 indexmin = np.nanargmin(pos[0][cycle_starts[k]:cycle_ends[k]])
                 ax.scatter(pos[0][indexmax], pos[1][indexmax], pos[2][indexmax], label="max {}".format(k),color=colors[k])
                 ax.scatter(pos[0][indexmin], pos[1][indexmin], pos[2][indexmin], label="min {}".format(k),color=colors[k])
-            ax.legend()
-            ax.set_xlabel('time[s]')
+            #ax.legend()
+            ax.set_xlabel('x[m]')
             ax.set_ylabel('y[m]')
-            ax.set_zlabel('x[m]')
+            ax.set_zlabel('z[m]')
             plt.title("3D_%s_%s_%d" % (name, p, n))
             plt.show()

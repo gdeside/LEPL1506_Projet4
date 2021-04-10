@@ -1,13 +1,8 @@
-import numpy as np
-import matplotlib.pyplot as plt
-import math
-
-from scipy import signal
-
-import glm_data_processing as glm
-import get_mu_points as gmp
-import get_mu_fit as gmf
 from os import path
+
+import matplotlib.pyplot as plt
+import numpy as np
+from scipy import signal
 
 import coda_tools as coda
 import processing_tools as tool

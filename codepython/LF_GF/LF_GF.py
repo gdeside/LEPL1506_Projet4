@@ -1,15 +1,11 @@
-import numpy as np
-import matplotlib.pyplot as plt
-import math
-
-from scipy import signal
-
-import glm_data_processing as glm
-import get_mu_points as gmp
-import get_mu_fit as gmf
 from os import path
 
+import matplotlib.pyplot as plt
+import numpy as np
+from scipy import signal
+
 import coda_tools as coda
+import glm_data_processing as glm
 import processing_tools as tool
 
 ntrials = 5  # /!\ changer noms de fichiers
@@ -71,7 +67,6 @@ for name in names:
             coda_df = coda.import_data(file_path)
             time1 = coda_df.time.to_numpy()
             markers_id = [6, 5, 8, 7]
-
             # Center position
             pos = coda.manipulandum_center(coda_df, markers_id)
             pos = pos / 1000

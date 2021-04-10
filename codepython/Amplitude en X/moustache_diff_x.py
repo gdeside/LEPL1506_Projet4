@@ -1,13 +1,8 @@
-import numpy as np
-import matplotlib.pyplot as plt
-import math
-
-from scipy import signal
-
-import glm_data_processing as glm
-import get_mu_points as gmp
-import get_mu_fit as gmf
 from os import path
+
+import matplotlib.pyplot as plt
+import numpy as np
+from scipy import signal
 
 import coda_tools as coda
 import processing_tools as tool
@@ -17,15 +12,15 @@ positions = ['UR', 'SP', 'UD']
 names = ['LH', 'GD', 'PDs', 'MH']
 colors = ['plum', 'aquamarine', 'aquamarine', 'royalblue', 'royalblue']
 sujet = {
-  "GD": "Sujet 1",
-  "LH": "Sujet 3",
-  "PDs": "Sujet 2",
+    "GD": "Sujet 1",
+    "LH": "Sujet 3",
+    "PDs": "Sujet 2",
     "MH": "Sujet 4"
 }
-positionsdico={
+positionsdico = {
     "SP": "Supine",
-    "UD":"UpsidDowm",
-    "UR":"UpRight"
+    "UD": "UpsidDowm",
+    "UR": "UpRight"
 }
 
 for name in names:
@@ -56,17 +51,20 @@ for name in names:
                     ecart.append(abs(np.nanmax(pos[0][cycle_starts[k]:cycle_ends[k]]) - np.nanmin(
                         pos[0][cycle_starts[k]:cycle_ends[k]])))
                 box.append(ecart)
-        boxplot=ax.boxplot(box, notch=False,vert=True,medianprops={'color':'purple'}, patch_artist=True, showfliers=False)
+        boxplot = ax.boxplot(box, notch=False, vert=True, medianprops={'color': 'purple'}, patch_artist=True,
+                             showfliers=False)
         for patch, color in zip(boxplot['boxes'], colors):
             patch.set_facecolor(color)
-        ax.legend([boxplot["boxes"][0],boxplot["boxes"][1],boxplot["boxes"][3]], ['train', 'no blind','blind'], loc='upper right')
-        ax.set_title("%s"%p)
-        ax.set_ylim(0.24,0.55)
+        ax.legend([boxplot["boxes"][0], boxplot["boxes"][1], boxplot["boxes"][3]], ['train', 'no blind', 'blind'],loc='upper right')
+        ax.set_title("%s" % positionsdico[p])
+        ax.set_ylim(0.20, 0.55)
         ax.set_ylabel("Amplitude mvt [m]")
-        if p=='UD':
-            ax.set_xlabel('essais')
+        if p == 'UD':
+            ax.set_xlabel('essais(#)')
         for i in ntrials:
-            index=i*np.ones(len(box[i-1]))
-            ax.scatter(index,box[i-1],alpha=0.6,color=colors[i-1])
-    fig.suptitle("amplitude boxplot %s" % name)
+            index = i * np.ones(len(box[i - 1]))
+            ax.scatter(index, box[i - 1], alpha=0.6, color=colors[i - 1])
+        ax.set_xticks([0.16])
+        ax.set_xticklabels([0,16])
+    fig.suptitle("amplitude boxplot %s" % sujet[name])
     plt.savefig("box_diffrence_en_x_for_%s.png" % name)

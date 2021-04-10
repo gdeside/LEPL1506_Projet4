@@ -1,111 +1,111 @@
 ######################## Position UpRight ###############################################
-Stats DeltaX pour GD en position UR et les essais 2 et 3
-p_value pour la variance 0.261356 
-les deux variances sont 0.007713 et 0.005490
+Stats DeltaX pour PDs en position UR et les essais 2 et 3
+p_value pour la variance 0.414672 
+les deux variances sont 0.006230 et 0.008012
                           Test for equality of means                          
 ==============================================================================
                  coef    std err          t      P>|t|      [0.025      0.975]
 ------------------------------------------------------------------------------
-subset #1     -0.0003      0.003     -0.089      0.930      -0.006       0.006
+subset #1     -0.0040      0.003     -1.336      0.195      -0.010       0.002
 ==============================================================================
-les deux moyennes sont: 0.402045 et 0.402296
+les deux moyennes sont: 0.031962 et 0.035983
 
 
-Stats DeltaX pour GD en position UR et les essais 3 et 4
-p_value pour la variance 0.000028 
-les deux variances sont 0.005490 et 0.022141
+Stats DeltaX pour PDs en position UR et les essais 3 et 4
+p_value pour la variance 0.811784 
+les deux variances sont 0.008012 et 0.008595
                           Test for equality of means                          
 ==============================================================================
                  coef    std err          t      P>|t|      [0.025      0.975]
 ------------------------------------------------------------------------------
-subset #1     -0.0078      0.007     -1.188      0.246      -0.021       0.006
+subset #1      0.0035      0.003      1.018      0.319      -0.004       0.010
 ==============================================================================
-les deux moyennes sont: 0.402296 et 0.410120
+les deux moyennes sont: 0.035983 et 0.032528
 
 
-Stats DeltaX pour GD en position UR et les essais 4 et 5
-p_value pour la variance 0.728726 
-les deux variances sont 0.022141 et 0.019989
+Stats DeltaX pour PDs en position UR et les essais 4 et 5
+p_value pour la variance 0.366988 
+les deux variances sont 0.008595 et 0.011229
                           Test for equality of means                          
 ==============================================================================
                  coef    std err          t      P>|t|      [0.025      0.975]
 ------------------------------------------------------------------------------
-subset #1      0.0227      0.009      2.631      0.015       0.005       0.040
+subset #1     -0.0052      0.004     -1.270      0.216      -0.014       0.003
 ==============================================================================
-les deux moyennes sont: 0.410120 et 0.387466
+les deux moyennes sont: 0.032528 et 0.037713
 
 
 ######################## Position Supine ###############################################
-Stats DeltaX pour GD en position SP et les essais 2 et 3
-p_value pour la variance 0.837935 
-les deux variances sont 0.007222 et 0.006800
+Stats DeltaX pour PDs en position SP et les essais 2 et 3
+p_value pour la variance 0.078125 
+les deux variances sont 0.018508 et 0.010886
                           Test for equality of means                          
 ==============================================================================
                  coef    std err          t      P>|t|      [0.025      0.975]
 ------------------------------------------------------------------------------
-subset #1      0.0104      0.003      3.649      0.001       0.005       0.016
+subset #1     -0.0091      0.006     -1.465      0.156      -0.022       0.004
 ==============================================================================
-les deux moyennes sont: 0.405679 et 0.395231
+les deux moyennes sont: 0.061879 et 0.070962
 
 
-Stats DeltaX pour GD en position SP et les essais 3 et 4
-p_value pour la variance 0.000000 
-les deux variances sont 0.006800 et 0.046758
+Stats DeltaX pour PDs en position SP et les essais 3 et 4
+p_value pour la variance 0.009274 
+les deux variances sont 0.010886 et 0.024028
                           Test for equality of means                          
 ==============================================================================
                  coef    std err          t      P>|t|      [0.025      0.975]
 ------------------------------------------------------------------------------
-subset #1      0.1096      0.014      8.019      0.000       0.081       0.138
+subset #1      0.0054      0.008      0.720      0.478      -0.010       0.021
 ==============================================================================
-les deux moyennes sont: 0.395231 et 0.285582
+les deux moyennes sont: 0.070962 et 0.065561
 
 
-Stats DeltaX pour GD en position SP et les essais 4 et 5
-p_value pour la variance 0.007672 
-les deux variances sont 0.046758 et 0.020902
+Stats DeltaX pour PDs en position SP et les essais 4 et 5
+p_value pour la variance 0.209502 
+les deux variances sont 0.024028 et 0.016624
                           Test for equality of means                          
 ==============================================================================
                  coef    std err          t      P>|t|      [0.025      0.975]
 ------------------------------------------------------------------------------
-subset #1     -0.0045      0.014     -0.309      0.760      -0.034       0.025
+subset #1     -0.0044      0.008     -0.535      0.597      -0.021       0.013
 ==============================================================================
-les deux moyennes sont: 0.285582 et 0.290045
+les deux moyennes sont: 0.065561 et 0.069962
 
 
 ######################## Position UpsidDowm ###############################################
-Stats DeltaX pour GD en position UD et les essais 2 et 3
-p_value pour la variance 0.681616 
-les deux variances sont 0.009360 et 0.010544
+Stats DeltaX pour PDs en position UD et les essais 2 et 3
+p_value pour la variance 0.520809 
+les deux variances sont 0.014589 et 0.012068
                           Test for equality of means                          
 ==============================================================================
                  coef    std err          t      P>|t|      [0.025      0.975]
 ------------------------------------------------------------------------------
-subset #1      0.0019      0.004      0.437      0.667      -0.007       0.011
+subset #1     -0.0026      0.005     -0.472      0.641      -0.014       0.009
 ==============================================================================
-les deux moyennes sont: 0.396618 et 0.394765
+les deux moyennes sont: 0.063407 et 0.065988
 
 
-Stats DeltaX pour GD en position UD et les essais 3 et 4
-p_value pour la variance 0.032179 
-les deux variances sont 0.010544 et 0.021563
+Stats DeltaX pour PDs en position UD et les essais 3 et 4
+p_value pour la variance 0.958242 
+les deux variances sont 0.012068 et 0.011883
                           Test for equality of means                          
 ==============================================================================
                  coef    std err          t      P>|t|      [0.025      0.975]
 ------------------------------------------------------------------------------
-subset #1      0.0814      0.008     10.835      0.000       0.066       0.097
+subset #1     -0.0200      0.005     -4.095      0.000      -0.030      -0.010
 ==============================================================================
-les deux moyennes sont: 0.394765 et 0.313363
+les deux moyennes sont: 0.065988 et 0.086008
 
 
-Stats DeltaX pour GD en position UD et les essais 4 et 5
-p_value pour la variance 0.932771 
-les deux variances sont 0.021563 et 0.021094
+Stats DeltaX pour PDs en position UD et les essais 4 et 5
+p_value pour la variance 0.365090 
+les deux variances sont 0.011883 et 0.015542
                           Test for equality of means                          
 ==============================================================================
                  coef    std err          t      P>|t|      [0.025      0.975]
 ------------------------------------------------------------------------------
-subset #1      0.0365      0.009      4.104      0.000       0.018       0.055
+subset #1      0.0075      0.006      1.334      0.195      -0.004       0.019
 ==============================================================================
-les deux moyennes sont: 0.313363 et 0.276842
+les deux moyennes sont: 0.086008 et 0.078472
 
 

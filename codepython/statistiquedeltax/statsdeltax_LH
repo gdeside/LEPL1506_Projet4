@@ -1,3 +1,4 @@
+######################## Position UpRight ###############################################
 Stats DeltaX pour LH en position UR et les essais 2 et 3
 p_value pour la variance 0.473128 
 les deux variances sont 0.012546 et 0.010147
@@ -34,6 +35,7 @@ subset #1     -0.0020      0.010     -0.204      0.840      -0.022       0.018
 les deux moyennes sont: 0.371230 et 0.373239
 
 
+######################## Position Supine ###############################################
 Stats DeltaX pour LH en position SP et les essais 2 et 3
 p_value pour la variance 0.406637 
 les deux variances sont 0.014647 et 0.018703
@@ -70,6 +72,7 @@ subset #1      0.0374      0.007      5.167      0.000       0.022       0.052
 les deux moyennes sont: 0.400047 et 0.362625
 
 
+######################## Position UpsidDowm ###############################################
 Stats DeltaX pour LH en position UD et les essais 2 et 3
 p_value pour la variance 0.278322 
 les deux variances sont 0.011080 et 0.015291

@@ -33,9 +33,11 @@ for name in names:
 
                 pos = coda.manipulandum_center(coda_df, markers_id)
                 pos = pos / 1000
+                baseline = range(0, 400)
+                pos[1]-=np.nanmean(pos[1][baseline])
                 posybis = pos[1][~np.isnan(pos[1])]
                 vel = tool.derive(pos, 200, axis=1)
-                box.append(posybis)
+                box.append(posybis/np.linalg.norm(posybis))
         boxplot=ax.boxplot(box, notch=True,vert=True,medianprops={'color':'purple'}, patch_artist=True, showfliers=False)
         for patch, color in zip(boxplot['boxes'], colors):
             patch.set_facecolor(color)
