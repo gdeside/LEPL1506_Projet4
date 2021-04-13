@@ -3,13 +3,14 @@ from os import path
 import matplotlib.pyplot as plt
 import numpy as np
 from scipy import signal
-
+from scipy import stats as sc
+import statsmodels.stats.weightstats as sm2
 import coda_tools as coda
 import processing_tools as tool
 
 ntrials = [1, 2, 3, 4, 5]  # /!\ changer noms de fichiers
 positions = ['UR', 'SP', 'UD']
-names = ['LH', 'GD', 'PDs', 'MH']
+names = ['GD', 'PDs', 'LH', 'MH']
 colors = ['plum', 'aquamarine', 'aquamarine', 'royalblue', 'royalblue']
 sujet = {
     "GD": "Sujet 1",
@@ -23,13 +24,23 @@ positionsdico = {
     "UR": "UpRight"
 }
 
-for name in names:
-    fig, (ax1, ax2, ax3) = plt.subplots(nrows=3, ncols=1, figsize=(15, 10))
-    tup = (ax1, ax2, ax3)
-    for p, ax in zip(positions, tup):
-        box = []
-        box1=[]
-        index=[]
+sujetcolor = {
+    "PDs": "deeppink",
+    "MH": "black",
+    "GD": "green",
+    "LH": "blueviolet"
+}
+sujetmarker = {
+    "GD": "d",
+    "MH": "o",
+    "LH": "s",
+    "PDs": "*"
+}
+
+meanopen = []
+meanclose = []
+for p in positions:
+    for name in names:
         for n in ntrials:
             file_path = "../../data/Groupe_1_codas/%s_%s_coda000%d.txt" % (name, p, n)
             if not path.exists(file_path):
@@ -52,19 +63,31 @@ for name in names:
                 for k in range(len(cycle_starts)):
                     ecart.append(abs(np.nanmax(pos[2][cycle_starts[k]:cycle_ends[k]]) - np.nanmin(
                         pos[2][cycle_starts[k]:cycle_ends[k]])))
-                box.append(np.nanmean(ecart))
-                box1.append(np.nanstd(ecart))
-                index.append(n)
-        ax.errorbar(index,box,yerr=box1,linestyle='dotted')
-        ax.axvspan(0.5, 1.50, facecolor='steelblue', alpha=0.2, label='train')
-        ax.axvspan(1.5, 3.50, facecolor='steelblue', alpha=0.5, label='no bind')
-        ax.axvspan(3.5, 5.50, facecolor='steelblue', alpha=0.8, label='bind')
-        ax.set_title("%s" % positionsdico[p])
-        ax.set_ylim(0.0, 0.13)
-        ax.set_ylabel("Amplitude mvt [m]")
-        if p=='UR':
-            ax.legend()
-        if p == 'UD':
-            ax.set_xlabel('essais(#)')
-    fig.suptitle("amplitude z Errorbar %s" % sujet[name])
-    plt.savefig("errorbar_en_z_for_%s.png" % name)
+                if n == 2 or n == 3:
+                    if not np.isnan(np.nanmean(ecart)):
+                        meanopen.append(np.nanmean(ecart))
+                if n == 4 or n == 5:
+                    if not np.isnan(np.nanmean(ecart)):
+                        meanclose.append(np.nanmean(ecart))
+
+result = []
+print(meanclose)
+print(meanopen)
+X1 = sm2.DescrStatsW(meanopen)
+X2 = sm2.DescrStatsW(meanclose)
+Ttest = sm2.CompareMeans(X1, X2)
+test1=Ttest.ttest_ind()
+print(Ttest.summary())
+result.append(np.nanmean(meanopen))
+result.append(np.nanmean(meanclose))
+fig, ax = plt.subplots(figsize=(5,5))
+label = ['no bind', 'bind']
+ind = np.arange(2)
+hbars = ax.bar(ind, result, width=0.35, align='center')
+ax.set_xticks(ind)
+ax.set_xticklabels(label)
+ax.text(-0.05, 0.05, 'pvalue is for mean: %f'% test1[1], style='italic',
+        bbox={'facecolor': 'red', 'alpha': 0.5, 'pad': 10})
+
+fig.suptitle("Amplitude moyenne en Z pour yeux ouverts et fermés")
+plt.savefig("bar_z.png")

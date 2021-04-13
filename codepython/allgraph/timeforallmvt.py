@@ -86,19 +86,19 @@ for name in names:
                 continue
 
             fig, (ax1, ax2, ax3, ax4, ax5,ax6) = plt.subplots(6, figsize=(20, 20))
-            ax1.plot(time1, pos[0])
+            ax1.plot(time1[cycle_starts[0]:cycle_ends[-1]], pos[0][cycle_starts[0]:cycle_ends[-1]]/np.linalg.norm(pos[0][cycle_starts[0]:cycle_ends[-1]]))
             ax1.set_ylabel("x[m]")
             ax1.set_title('positions x')
+            #ax1.set_ylim(-0.060,-0.020)
             for i in range(0, len(cycle_starts)):
                 rect0 = plt.Rectangle((time1[cycle_starts[i]], ax1.get_ylim()[0]),
                                       time1[cycle_ends[i] - cycle_starts[i]], ax1.get_ylim()[1] - ax1.get_ylim()[0], color='k', alpha=0.3)
                 ax1.add_patch(rect0)
             plt.setp(ax1.get_xticklabels(), visible=False)
 
-            ax2.plot(time1, pos[1])
+            ax2.plot(time1[cycle_starts[0]:cycle_ends[-1]], pos[1][cycle_starts[0]:cycle_ends[-1]]/np.linalg.norm(pos[1][cycle_starts[0]:cycle_ends[-1]]))
+            #ax2.set_ylim(-0.050,-0.035)
 
-
-            # ax1.set_ylim(-0.80, -0.20)
             ax2.set_title('positions y')
             ax2.set_ylabel("y[m]")
             for i in range(0, len(cycle_starts)):
@@ -106,9 +106,10 @@ for name in names:
                                       time1[cycle_ends[i] - cycle_starts[i]], ax2.get_ylim()[1] - ax2.get_ylim()[0], color='k', alpha=0.3)
                 ax2.add_patch(rect0)
             plt.setp(ax2.get_xticklabels(), visible=False)
-            ax3.plot(time1, pos[2])
+            ax3.plot(time1[cycle_starts[0]:cycle_ends[-1]], pos[2][cycle_starts[0]:cycle_ends[-1]]/np.linalg.norm(pos[2][cycle_starts[0]:cycle_ends[-1]]))
             ax3.set_title('positions z')
             ax3.set_ylabel("z[m]")
+           # ax3.set_ylim(0.034, 0.048)
             for i in range(0, len(cycle_starts)):
                 rect0 = plt.Rectangle((time1[cycle_starts[i]], ax3.get_ylim()[0]),
                                       time1[cycle_ends[i] - cycle_starts[i]], ax3.get_ylim()[1] - ax3.get_ylim()[0], color='k', alpha=0.3)

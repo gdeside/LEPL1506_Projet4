@@ -6,7 +6,7 @@ sujet = {
 }
 positionsdico={
     "SP": "Supine",
-    "UD":"UpsideDowm",
+    "UD":"UpsideDown",
     "UR":"UpRight"
 }
 
