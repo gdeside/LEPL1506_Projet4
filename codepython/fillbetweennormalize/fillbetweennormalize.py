@@ -27,6 +27,11 @@ positionsdico={
     "UR":"UpRight"
 }
 
+poscolor={
+    "UD":"green",
+    "UR":"blue",
+    "SP":"orange"
+}
 
 nb_magique = 576
 min = np.Infinity
@@ -87,17 +92,17 @@ for name in names:
             xstd = np.nanstd(allx, axis=0)
             ystd = np.nanstd(ally, axis=0)
             zstd =np.nanstd(allz, axis=0)
-            axs[a].plot(index, xmean)
-            axs[a].fill_between(index, xmean + xstd, xmean - xstd, alpha=0.3, label=positionsdico[p])
+            axs[a].plot(index, xmean,color=poscolor[p])
+            axs[a].fill_between(index, xmean + xstd, xmean - xstd,color=poscolor[p], alpha=0.3, label=positionsdico[p])
             axs[a].set_facecolor(colors[n-1])
             axs[a].legend()
             axs[a].set_ylim(-0.060,-0.020)
-            axs[a + 5].plot(index, ymean)
-            axs[a + 5].fill_between(index, ymean + ystd, ymean - ystd, alpha=0.3, label=positionsdico[p])
+            axs[a + 5].plot(index, ymean,color=poscolor[p])
+            axs[a + 5].fill_between(index, ymean + ystd, ymean - ystd,color=poscolor[p], alpha=0.3, label=positionsdico[p])
             axs[a+5].set_ylim(-0.050, -0.035)
             axs[a+5].set_facecolor(colors[n-1])
-            axs[a + 10].plot(index, zmean)
-            axs[a + 10].fill_between(index, zmean + zstd, zmean - zstd, alpha=0.3, label=positionsdico[p])
+            axs[a + 10].plot(index, zmean,color=poscolor[p])
+            axs[a + 10].fill_between(index, zmean + zstd, zmean - zstd,color=poscolor[p], alpha=0.3, label=positionsdico[p])
             axs[a + 10].set_ylim(0.034, 0.048)
             axs[a + 10].set_facecolor(colors[n - 1])
             axs[a + 10].set_xlabel('Cycle(%)')

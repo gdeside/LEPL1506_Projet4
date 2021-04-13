@@ -1,0 +1,55 @@
+######################## Position UpRight ###############################################
+Stats DeltaX pour MH en position UR et l'essais 2
+p_value is 0.798943
+la moyenne est: 0.401480 
+
+
+Stats DeltaX pour MH en position UR et l'essais 3
+p_value is 0.002414
+la moyenne est: 0.420465 
+
+
+Stats DeltaX pour MH en position UR et l'essais 4
+p_value is nan
+la moyenne est: nan 
+
+
+Stats DeltaX pour MH en position UR et l'essais 5
+p_value is 0.000746
+la moyenne est: 0.429556 
+
+
+######################## Position Supine ###############################################
+Stats DeltaX pour MH en position SP et l'essais 2
+p_value is 0.000000
+la moyenne est: 0.467224 
+
+
+Stats DeltaX pour MH en position SP et l'essais 3
+p_value is 0.000001
+la moyenne est: 0.462544 
+
+
+Stats DeltaX pour MH en position SP et l'essais 4
+p_value is 0.000002
+la moyenne est: 0.452194 
+
+
+Stats DeltaX pour MH en position SP et l'essais 5
+p_value is 0.002254
+la moyenne est: 0.438312 
+
+
+######################## Position UpsidDowm ###############################################
+Stats DeltaX pour MH en position UD et l'essais 2
+p_value is 0.000000
+la moyenne est: 0.430348 
+
+
+Stats DeltaX pour MH en position UD et l'essais 3
+Stats DeltaX pour MH en position UD et l'essais 4
+p_value is 0.000001
+la moyenne est: 0.319156 
+
+
+Stats DeltaX pour MH en position UD et l'essais 5

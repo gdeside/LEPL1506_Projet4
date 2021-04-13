@@ -15,6 +15,17 @@ import processing_tools as tool
 ntrials = 5  # /!\ changer noms de fichiers
 positions = ['UR', 'SP', 'UD']
 names = ['PDS', 'GD', 'MH', 'LH']
+sujet = {
+  "GD": "Sujet 1",
+  "LH": "Sujet 3",
+  "PDs": "Sujet 2",
+    "MH": "Sujet 4"
+}
+positionsdico={
+    "SP": "Supine",
+    "UD":"UpsideDowm",
+    "UR":"UpRight"
+}
 
 for name in names:
     GFmean = []
@@ -101,8 +112,9 @@ for name in names:
 
     plt.errorbar(index, GFmean, yerr=GFstd,linestyle='dotted')
     plt.ylabel("GF[N]")
-    plt.xlabel("essais")
-    plt.title("Moyenne et ecart type: GFmax pour les diférrents essais pour {}".format(name))
+    plt.xlabel("essais(#)")
+    plt.xticks([0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16])
+    plt.title("Moyenne et ecart type: GFmax pour les diférrents essais pour {}".format(sujet[name]))
     plt.axvspan(0.5, 1.50, facecolor='steelblue', alpha=0.5, label='UR train')
     plt.axvspan(1.50, 3.50, facecolor='steelblue', alpha=0.5, label='UR no bind')
     plt.axvspan(3.50, 5.50, facecolor='steelblue', alpha=0.8, label='UR bind')

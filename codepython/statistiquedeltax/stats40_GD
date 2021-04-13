@@ -1,0 +1,63 @@
+######################## Position UpRight ###############################################
+Stats DeltaX pour GD en position UR et l'essais 2
+p_value is 0.421315
+la moyenne est: 0.402045 
+
+
+Stats DeltaX pour GD en position UR et l'essais 3
+p_value is 0.173097
+la moyenne est: 0.402296 
+
+
+Stats DeltaX pour GD en position UR et l'essais 4
+p_value is 0.139319
+la moyenne est: 0.410120 
+
+
+Stats DeltaX pour GD en position UR et l'essais 5
+p_value is 0.050592
+la moyenne est: 0.387466 
+
+
+######################## Position Supine ###############################################
+Stats DeltaX pour GD en position SP et l'essais 2
+p_value is 0.018470
+la moyenne est: 0.405679 
+
+
+Stats DeltaX pour GD en position SP et l'essais 3
+p_value is 0.031747
+la moyenne est: 0.395231 
+
+
+Stats DeltaX pour GD en position SP et l'essais 4
+p_value is 0.000006
+la moyenne est: 0.285582 
+
+
+Stats DeltaX pour GD en position SP et l'essais 5
+p_value is 0.000000
+la moyenne est: 0.290045 
+
+
+######################## Position UpsidDowm ###############################################
+Stats DeltaX pour GD en position UD et l'essais 2
+p_value is 0.234578
+la moyenne est: 0.396618 
+
+
+Stats DeltaX pour GD en position UD et l'essais 3
+p_value is 0.147466
+la moyenne est: 0.394765 
+
+
+Stats DeltaX pour GD en position UD et l'essais 4
+p_value is 0.000000
+la moyenne est: 0.313363 
+
+
+Stats DeltaX pour GD en position UD et l'essais 5
+p_value is 0.000000
+la moyenne est: 0.276842 
+
+

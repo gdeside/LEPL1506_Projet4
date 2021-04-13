@@ -1,111 +1,111 @@
 ######################## Position UpRight ###############################################
-Stats DeltaX pour GD en position UR et les essais 2 et 3
-p_value pour la variance 0.078020 
-les deux variances sont 0.003622 et 0.006445
+Stats AllY pour LH en position UR et les essais 2 et 3
+p_value pour la variance nan 
+les deux variances sont nan et nan
                           Test for equality of means                          
 ==============================================================================
                  coef    std err          t      P>|t|      [0.025      0.975]
 ------------------------------------------------------------------------------
-subset #1   4.272e-06      0.002      0.002      0.999      -0.005       0.005
+subset #1         nan        nan        nan        nan         nan         nan
 ==============================================================================
-les deux moyennes sont: 0.025425 et 0.025420
+les deux moyennes sont: nan et nan
 
 
-Stats DeltaX pour GD en position UR et les essais 3 et 4
-p_value pour la variance 0.108362 
-les deux variances sont 0.006445 et 0.003980
+Stats AllY pour LH en position UR et les essais 3 et 4
+p_value pour la variance nan 
+les deux variances sont nan et nan
                           Test for equality of means                          
 ==============================================================================
                  coef    std err          t      P>|t|      [0.025      0.975]
 ------------------------------------------------------------------------------
-subset #1     -0.0006      0.002     -0.290      0.774      -0.005       0.004
+subset #1         nan        nan        nan        nan         nan         nan
 ==============================================================================
-les deux moyennes sont: 0.025420 et 0.026055
+les deux moyennes sont: nan et nan
 
 
-Stats DeltaX pour GD en position UR et les essais 4 et 5
-p_value pour la variance 0.320363 
-les deux variances sont 0.003980 et 0.005345
+Stats AllY pour LH en position UR et les essais 4 et 5
+p_value pour la variance nan 
+les deux variances sont nan et nan
                           Test for equality of means                          
 ==============================================================================
                  coef    std err          t      P>|t|      [0.025      0.975]
 ------------------------------------------------------------------------------
-subset #1      0.0036      0.002      1.848      0.077      -0.000       0.008
+subset #1         nan        nan        nan        nan         nan         nan
 ==============================================================================
-les deux moyennes sont: 0.026055 et 0.022499
+les deux moyennes sont: nan et nan
 
 
 ######################## Position Supine ###############################################
-Stats DeltaX pour GD en position SP et les essais 2 et 3
-p_value pour la variance 0.840247 
-les deux variances sont 0.006834 et 0.007253
+Stats AllY pour LH en position SP et les essais 2 et 3
+p_value pour la variance nan 
+les deux variances sont nan et nan
                           Test for equality of means                          
 ==============================================================================
                  coef    std err          t      P>|t|      [0.025      0.975]
 ------------------------------------------------------------------------------
-subset #1     -0.0001      0.003     -0.050      0.961      -0.006       0.006
+subset #1         nan        nan        nan        nan         nan         nan
 ==============================================================================
-les deux moyennes sont: 0.029211 et 0.029354
+les deux moyennes sont: nan et nan
 
 
-Stats DeltaX pour GD en position SP et les essais 3 et 4
-p_value pour la variance 0.439475 
-les deux variances sont 0.007253 et 0.009127
+Stats AllY pour LH en position SP et les essais 3 et 4
+p_value pour la variance nan 
+les deux variances sont nan et nan
                           Test for equality of means                          
 ==============================================================================
                  coef    std err          t      P>|t|      [0.025      0.975]
 ------------------------------------------------------------------------------
-subset #1     -0.0038      0.003     -1.117      0.276      -0.011       0.003
+subset #1         nan        nan        nan        nan         nan         nan
 ==============================================================================
-les deux moyennes sont: 0.029354 et 0.033179
+les deux moyennes sont: nan et nan
 
 
-Stats DeltaX pour GD en position SP et les essais 4 et 5
-p_value pour la variance 0.092263 
-les deux variances sont 0.009127 et 0.015379
+Stats AllY pour LH en position SP et les essais 4 et 5
+p_value pour la variance nan 
+les deux variances sont nan et nan
                           Test for equality of means                          
 ==============================================================================
                  coef    std err          t      P>|t|      [0.025      0.975]
 ------------------------------------------------------------------------------
-subset #1     -0.0080      0.005     -1.510      0.144      -0.019       0.003
+subset #1         nan        nan        nan        nan         nan         nan
 ==============================================================================
-les deux moyennes sont: 0.033179 et 0.041140
+les deux moyennes sont: nan et nan
 
 
 ######################## Position UpsidDowm ###############################################
-Stats DeltaX pour GD en position UD et les essais 2 et 3
-p_value pour la variance 0.418951 
-les deux variances sont 0.007334 et 0.009342
+Stats AllY pour LH en position UD et les essais 2 et 3
+p_value pour la variance nan 
+les deux variances sont nan et nan
                           Test for equality of means                          
 ==============================================================================
                  coef    std err          t      P>|t|      [0.025      0.975]
 ------------------------------------------------------------------------------
-subset #1     -0.0011      0.004     -0.317      0.754      -0.009       0.006
+subset #1         nan        nan        nan        nan         nan         nan
 ==============================================================================
-les deux moyennes sont: 0.031137 et 0.032265
+les deux moyennes sont: nan et nan
 
 
-Stats DeltaX pour GD en position UD et les essais 3 et 4
-p_value pour la variance 0.183370 
-les deux variances sont 0.009342 et 0.014419
+Stats AllY pour LH en position UD et les essais 3 et 4
+p_value pour la variance nan 
+les deux variances sont nan et nan
                           Test for equality of means                          
 ==============================================================================
                  coef    std err          t      P>|t|      [0.025      0.975]
 ------------------------------------------------------------------------------
-subset #1     -0.0147      0.005     -2.750      0.012      -0.026      -0.004
+subset #1         nan        nan        nan        nan         nan         nan
 ==============================================================================
-les deux moyennes sont: 0.032265 et 0.046991
+les deux moyennes sont: nan et nan
 
 
-Stats DeltaX pour GD en position UD et les essais 4 et 5
-p_value pour la variance 0.689516 
-les deux variances sont 0.014419 et 0.012828
+Stats AllY pour LH en position UD et les essais 4 et 5
+p_value pour la variance nan 
+les deux variances sont nan et nan
                           Test for equality of means                          
 ==============================================================================
                  coef    std err          t      P>|t|      [0.025      0.975]
 ------------------------------------------------------------------------------
-subset #1      0.0032      0.006      0.569      0.575      -0.009       0.015
+subset #1         nan        nan        nan        nan         nan         nan
 ==============================================================================
-les deux moyennes sont: 0.046991 et 0.043757
+les deux moyennes sont: nan et nan
 
 
