@@ -23,17 +23,17 @@ positionsdico = {
     "UR": "UpRight"
 }
 
-sujetcolor={
-    "PDs":"deeppink",
+sujetcolor = {
+    "PDs": "deeppink",
     "MH": "black",
-    "GD":"green",
-    "LH":"blueviolet"
+    "GD": "green",
+    "LH": "blueviolet"
 }
-sujetmarker={
-    "GD":"d",
-    "MH":"o",
-    "LH":"s",
-    "PDs":"*"
+sujetmarker = {
+    "GD": "d",
+    "MH": "o",
+    "LH": "s",
+    "PDs": "*"
 }
 
 fig, (ax1, ax2, ax3) = plt.subplots(nrows=3, ncols=1, figsize=(7, 10))
@@ -63,16 +63,19 @@ for p, ax in zip(positions, tup):
 
                 ecart = []
                 for k in range(len(cycle_starts)):
-                    ecart.append(abs(np.nanmax(pos[0][cycle_starts[k]:cycle_ends[k]]) - np.nanmin(
-                        pos[0][cycle_starts[k]:cycle_ends[k]])))
+                    if not np.isnan(abs(np.nanmax(pos[0][cycle_starts[k]:cycle_ends[k]]) - np.nanmin(
+                            pos[0][cycle_starts[k]:cycle_ends[k]]))):
+                        ecart.append(abs(np.nanmax(pos[0][cycle_starts[k]:cycle_ends[k]]) - np.nanmin(
+                            pos[0][cycle_starts[k]:cycle_ends[k]])))
                 box.append(np.nanmean(ecart))
                 box1.append(np.nanstd(ecart))
                 index.append(n)
-        if ax==ax3:
-            ax.errorbar(index, box, yerr=box1, linestyle='dotted',color=sujetcolor[name],marker=sujetmarker[name],label=sujet[name])
+        if ax == ax3:
+            ax.errorbar(index, box, yerr=box1, linestyle='dotted', color=sujetcolor[name], marker=sujetmarker[name],
+                        label=sujet[name])
         else:
-            ax.errorbar(index, box, yerr=box1, linestyle='dotted',color=sujetcolor[name],marker=sujetmarker[name])
-    if ax3==ax:
+            ax.errorbar(index, box, yerr=box1, linestyle='dotted', color=sujetcolor[name], marker=sujetmarker[name])
+    if ax3 == ax:
         ax.axvspan(0.5, 1.50, facecolor='steelblue', alpha=0.2)
         ax.axvspan(1.5, 3.50, facecolor='steelblue', alpha=0.5)
         ax.axvspan(3.5, 5.50, facecolor='steelblue', alpha=0.8)
@@ -81,8 +84,8 @@ for p, ax in zip(positions, tup):
         ax.axvspan(1.5, 3.50, facecolor='steelblue', alpha=0.5, label='no bind')
         ax.axvspan(3.5, 5.50, facecolor='steelblue', alpha=0.8, label='bind')
     ax.set_ylim(0.20, 0.55)
-    ax.set_xlim(0.9,5.1)
-    ax.set_xticks([1,2,3,4,5])
+    ax.set_xlim(0.9, 5.1)
+    ax.set_xticks([1, 2, 3, 4, 5])
     ax.set_title("%s" % positionsdico[p])
     ax.set_ylabel("Amplitude mvt [m]")
     if p == 'UR':
@@ -92,4 +95,3 @@ for p, ax in zip(positions, tup):
         ax.set_xlabel('blocs(#)')
 fig.suptitle("amplitude x Errorbar all subjects")
 plt.savefig("errorbar_en_x_for_all.png")
-

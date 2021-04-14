@@ -94,8 +94,8 @@ for name in names:
                 id = np.where((time > time1[cycle_starts[i]]) & (time < time1[cycle_ends[i]]))
                 GFmax.append(np.nanmax(GF[id]))
             index.append(n + a * 5)
-            if name == "LH" and (n == 2 or n == 3) and p=="UD":
-                GFmax += GFmean[0]
+            #if name == "LH" and (n == 2 or n == 3) and p=="UD":
+            #    GFmax += GFmean[0]
             GFmean.append(np.mean(GFmax))
             GFstd.append(np.std(GFmax))
 
