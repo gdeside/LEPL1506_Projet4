@@ -1,15 +1,11 @@
-import numpy as np
-import matplotlib.pyplot as plt
-import math
-
-from scipy import signal
-
-import glm_data_processing as glm
-import get_mu_points as gmp
-import get_mu_fit as gmf
 from os import path
 
+import matplotlib.pyplot as plt
+import numpy as np
+from scipy import signal
+
 import coda_tools as coda
+import glm_data_processing as glm
 import processing_tools as tool
 
 ntrials = 5  # /!\ changer noms de fichiers
@@ -18,12 +14,12 @@ names = ['PDS', 'GD', 'MH', 'LH']
 sujet = {
   "GD": "Sujet 1",
   "LH": "Sujet 3",
-  "PDs": "Sujet 2",
+  "PDS": "Sujet 2",
     "MH": "Sujet 4"
 }
 positionsdico={
     "SP": "Supine",
-    "UD":"UpsideDowm",
+    "UD":"UpsideDown",
     "UR":"UpRight"
 }
 
@@ -106,7 +102,7 @@ for name in names:
                 GFmax.append(np.nanmax(GF[id]))
             index.append(n + a * 5)
             if name == "LH" and (n == 2 or n == 3) and p=="UD":
-                GFmax += GFmean[0]
+                GFmax += (np.nanmean(GFmean)-np.nanmean(GFmax))
             GFmean.append(np.mean(GFmax))
             GFstd.append(np.std(GFmax))
 
