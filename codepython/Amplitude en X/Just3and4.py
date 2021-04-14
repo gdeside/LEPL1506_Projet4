@@ -2,14 +2,14 @@ from os import path
 
 import matplotlib.pyplot as plt
 import numpy as np
-import statsmodels.stats.weightstats as sm2
 from scipy import signal
+import statsmodels.stats.weightstats as sm2
 from scipy import stats as sc
 
 import coda_tools as coda
 import processing_tools as tool
 
-ntrials = [1, 2, 3, 4, 5]  # /!\ changer noms de fichiers
+ntrials = [3, 4]  # /!\ changer noms de fichiers
 positions = ['UR', 'SP', 'UD']
 names = ['GD', 'PDs', 'LH', 'MH']
 colors = ['plum', 'aquamarine', 'aquamarine', 'royalblue', 'royalblue']
@@ -40,14 +40,22 @@ sujetmarker = {
 
 fig, (ax1, ax2, ax3) = plt.subplots(nrows=3, ncols=1, figsize=(7, 10))
 tup = (ax1, ax2, ax3)
+file1 = open("stats34_delatx", "w")
 for p, ax in zip(positions, tup):
-    a=-2
+    a = -2
+    file1.write("########################%s######################" % positionsdico[p])
+    array3 = []
+    array4 = []
     for name in names:
+        if p == 'UR' and name == 'MH':
+            continue
         box = []
         box1 = []
         index = []
-        a+=1
+        a += 1
         for n in ntrials:
+            if p == 'UD' and name == 'MH' and n == 3:
+                n = 2
             file_path = "../../data/Groupe_1_codas/%s_%s_coda000%d.txt" % (name, p, n)
             if not path.exists(file_path):
                 continue
@@ -71,31 +79,38 @@ for p, ax in zip(positions, tup):
                             pos[0][cycle_starts[k]:cycle_ends[k]]))):
                         ecart.append(abs(np.nanmax(pos[0][cycle_starts[k]:cycle_ends[k]]) - np.nanmin(
                             pos[0][cycle_starts[k]:cycle_ends[k]])))
+                if n == 3:
+                    array3.append(np.nanmean(ecart))
+                if n == 4:
+                    array4.append(np.nanmean(ecart))
                 box.append(np.nanmean(ecart))
                 box1.append(np.nanstd(ecart))
-                index.append(n + a * 0.05)
+                if p == 'UD' and name == 'MH' and n == 2:
+                    index.append(n+1 + a * 0.05)
+                else:
+                    index.append(n + a * 0.05)
         if ax == ax3:
             ax.errorbar(index, box, yerr=box1, linestyle='dotted', color=sujetcolor[name], marker=sujetmarker[name],
                         label=sujet[name])
         else:
             ax.errorbar(index, box, yerr=box1, linestyle='dotted', color=sujetcolor[name], marker=sujetmarker[name])
-    if ax3 == ax:
-        ax.axvspan(0.5, 1.50, facecolor='steelblue', alpha=0.2)
-        ax.axvspan(1.5, 3.50, facecolor='steelblue', alpha=0.5)
-        ax.axvspan(3.5, 5.50, facecolor='steelblue', alpha=0.8)
-    else:
-        ax.axvspan(0.5, 1.50, facecolor='steelblue', alpha=0.2, label='train')
-        ax.axvspan(1.5, 3.50, facecolor='steelblue', alpha=0.5, label='no bind')
-        ax.axvspan(3.5, 5.50, facecolor='steelblue', alpha=0.8, label='bind')
     ax.set_ylim(0.20, 0.55)
     ax.set_xlim(0.9, 5.15)
-    ax.set_xticks([1, 2, 3, 4, 5])
+    ax.set_xticks([3, 4])
+    ax.set_xticklabels(['last block no bind', 'first block bind'])
+    ax.set_xlim(2.85, 4.15)
     ax.set_title("%s" % positionsdico[p])
     ax.set_ylabel("Amplitude mvt [m]")
-    if p == 'UR':
-        ax.legend(loc="lower left")
+    X1 = sm2.DescrStatsW(array3)
+    X2 = sm2.DescrStatsW(array4)
+    Ttest = sm2.CompareMeans(X1, X2)
+    file1.write(Ttest.summary(usevar='pooled').as_text() + "\n")
+    file1.write("les deux moyennes sont: %f et %f\n" % (np.nanmean(array3), np.nanmean(array4)))
+    Txbis, pvalbis = sc.bartlett(array3, array4)
+    file1.write("p_value pour la variance %f \n" % pvalbis)
+    file1.write("les deux variances sont %f et %f\n" % (np.nanstd(array3), np.nanstd(array4)))
     if p == 'UD':
         ax.legend(loc="lower left")
-        ax.set_xlabel('blocs(#)')
 fig.suptitle("amplitude x Errorbar all subjects")
-plt.savefig("errorbar_en_x_for_all.png")
+plt.savefig("34_en_x_for_all.png")
+file1.close()

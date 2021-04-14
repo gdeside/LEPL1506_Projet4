@@ -39,10 +39,12 @@ sujetmarker={
 fig, (ax1, ax2, ax3) = plt.subplots(nrows=3, ncols=1, figsize=(7, 10))
 tup = (ax1, ax2, ax3)
 for p, ax in zip(positions, tup):
+    a=-3
     for name in names:
         box = []
         box1 = []
         index = []
+        a+=1
         for n in ntrials:
             file_path = "../../data/Groupe_1_codas/%s_%s_coda000%d.txt" % (name, p, n)
             if not path.exists(file_path):
@@ -67,15 +69,13 @@ for p, ax in zip(positions, tup):
                         pos[1][cycle_starts[k]:cycle_ends[k]])))
                 box.append(np.nanmean(ecart))
                 box1.append(np.nanstd(ecart))
-                index.append(n)
+                index.append(n+ a * 0.05)
 
         ax.errorbar(index, box, yerr=box1, linestyle='dotted',color=sujetcolor[name],marker=sujetmarker[name],label=sujet[name])
-
-
     ax.axvspan(0.5, 1.50, facecolor='steelblue', alpha=0.2, label='train')
     ax.axvspan(1.5, 3.50, facecolor='steelblue', alpha=0.5, label='no bind')
     ax.axvspan(3.5, 5.50, facecolor='steelblue', alpha=0.8, label='bind')
-    ax.set_ylim(0.015, 0.1)
+    ax.set_ylim(0.0, 0.15)
     ax.set_xlim(0.9,5.1)
     ax.set_xticks([1,2,3,4,5])
     ax.set_title("%s" % positionsdico[p])
