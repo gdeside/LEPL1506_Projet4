@@ -37,6 +37,14 @@ sujetmarker = {
     "LH": "s",
     "PDs": "*"
 }
+indexsubject = {
+    "GD": [1, 2],
+    "MH": [7, 8],
+    "LH": [5, 6],
+    "PDs": [3, 4]
+}
+
+
 def transformpvalue(p: float):
     if p < 0.0001:
         return "****"
@@ -49,12 +57,11 @@ def transformpvalue(p: float):
     else:
         return 'ns'
 
+
 fig, (ax1, ax2, ax3) = plt.subplots(nrows=3, ncols=1, figsize=(7, 10))
 tup = (ax1, ax2, ax3)
-file1 = open("statsBNB_delatx", "w")
 for p, ax in zip(positions, tup):
     a = -3
-    file1.write("########################%s######################" % positionsdico[p])
     for name in names:
         openarray = []
         closearray = []
@@ -79,42 +86,50 @@ for p, ax in zip(positions, tup):
 
                 ecart = []
                 for k in range(len(cycle_starts)):
-                    if not np.isnan(abs(np.nanmax(pos[0][cycle_starts[k]:cycle_ends[k]]) - np.nanmin(
-                            pos[0][cycle_starts[k]:cycle_ends[k]]))):
+                    if not np.isnan(abs(np.nanmax(pos[2][cycle_starts[k]:cycle_ends[k]]) - np.nanmin(
+                            pos[2][cycle_starts[k]:cycle_ends[k]]))):
                         if n == 2 or n == 3:
-                            openarray.append(abs(np.nanmax(pos[0][cycle_starts[k]:cycle_ends[k]]) - np.nanmin(
-                                pos[0][cycle_starts[k]:cycle_ends[k]])))
+                            openarray.append(abs(np.nanmax(pos[2][cycle_starts[k]:cycle_ends[k]]) - np.nanmin(
+                                pos[2][cycle_starts[k]:cycle_ends[k]])))
                         if n == 4 or n == 5:
-                            closearray.append(abs(np.nanmax(pos[0][cycle_starts[k]:cycle_ends[k]]) - np.nanmin(
-                                pos[0][cycle_starts[k]:cycle_ends[k]])))
+                            closearray.append(abs(np.nanmax(pos[2][cycle_starts[k]:cycle_ends[k]]) - np.nanmin(
+                                pos[2][cycle_starts[k]:cycle_ends[k]])))
         X1 = sm2.DescrStatsW(openarray)
         X2 = sm2.DescrStatsW(closearray)
         Ttest = sm2.CompareMeans(X1, X2)
         t2, p2 = sc.ttest_ind(openarray, closearray)
-        file1.write(Ttest.summary(usevar='pooled').as_text() + "\n")
-        file1.write("les deux moyennes sont: %f et %f\n" % (np.nanmean(openarray), np.nanmean(closearray)))
         Txbis, pvalbis = sc.bartlett(openarray, closearray)
-        file1.write("p_value pour la variance %f \n" % pvalbis)
-        file1.write("les deux variances sont %f et %f\n" % (np.nanstd(openarray), np.nanstd(closearray)))
-        file1.write('****transforme de pvalue =%s\n'%transformpvalue(p2))
-
         box = [np.nanmean(openarray), np.nanmean(closearray)]
         box1 = [np.nanstd(openarray), np.nanstd(closearray)]
-        index = [1 + a * 0.05, 2 + a * 0.05]
-        if ax == ax3:
-            ax.errorbar(index, box, yerr=box1, linestyle='dotted', color=sujetcolor[name], marker=sujetmarker[name],
-                        label=sujet[name])
+        index = indexsubject[name]
+        indexgraph1 = np.linspace(index[0] - 0.25, index[0] + 0.25, 50)
+        plotarray1 = np.zeros(50) + box[0]
+        indexgraph2 = np.linspace(index[1] - 0.25, index[1] + 0.25, 50)
+        plotarray2 = np.zeros(50) + box[1]
+        indexscatter1 = np.zeros(len(openarray)) + index[0]
+        indexscatter2 = np.zeros(len(closearray)) + index[1]
+        if ax == ax1:
+            ax.plot(indexgraph1, plotarray1, linestyle='dotted', color=sujetcolor[name],
+                    label=sujet[name])
+            ax.scatter(indexscatter1, openarray, color=sujetcolor[name], alpha=0.5,s=20)
+            ax.plot(indexgraph2, plotarray2, linestyle='dotted', color=sujetcolor[name])
+            ax.scatter(indexscatter2, closearray, color=sujetcolor[name], alpha=0.5,s=20)
+            ax.text(index[0] + 0.5, 0.08, '%s' % transformpvalue(p2), fontsize=8)
         else:
-            ax.errorbar(index, box, yerr=box1, linestyle='dotted', color=sujetcolor[name], marker=sujetmarker[name])
-    ax.set_ylim(0.20, 0.55)
+            ax.plot(indexgraph1, plotarray1, linestyle='dotted', color=sujetcolor[name])
+            ax.scatter(indexscatter1, openarray, color=sujetcolor[name], alpha=0.5,s=20)
+            ax.plot(indexgraph2, plotarray2, linestyle='dotted', color=sujetcolor[name])
+            ax.scatter(indexscatter2, closearray, color=sujetcolor[name], alpha=0.5,s=20)
+            ax.text(index[0] + 0.5, 0.21, '%s' % transformpvalue(p2), fontsize=8)
+    ax.set_ylim(0.0, 0.23)
     ax.set_xlim(0.85, 2.15)
-    ax.set_xticks([1, 2])
-    ax.set_xticklabels(["no blind", 'blind'])
+    ax.set_xticks([1, 2, 3, 4, 5, 6, 7, 8])
+    ax.set_xlim(0.5, 8.5)
+    ax.set_xticklabels(["no blind", 'blind', "no blind", 'blind', "no blind", 'blind', "no blind", 'blind'])
     ax.set_title("%s" % positionsdico[p])
     ax.set_ylabel("Amplitude mvt [m]")
-    if p == 'UD':
-        ax.legend(loc="lower left")
-        #ax.set_xlabel('blocs(#)')
-fig.suptitle("amplitude x Errorbar all subjects")
-plt.savefig("errorbar_en_x_for_all23.png")
-file1.close()
+    if p == 'UR':
+        ax.legend(loc="upper left")
+        # ax.set_xlabel('blocs(#)')
+fig.suptitle("amplitude z Errorbar all subjects")
+plt.savefig("errorbar_en_z_for_allpvalue.png")

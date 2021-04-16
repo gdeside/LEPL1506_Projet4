@@ -37,6 +37,8 @@ sujetmarker = {
     "LH": "s",
     "PDs": "*"
 }
+
+
 def transformpvalue(p: float):
     if p < 0.0001:
         return "****"
@@ -49,12 +51,13 @@ def transformpvalue(p: float):
     else:
         return 'ns'
 
+
 fig, (ax1, ax2, ax3) = plt.subplots(nrows=3, ncols=1, figsize=(7, 10))
 tup = (ax1, ax2, ax3)
-file1 = open("statsBNB_delatx", "w")
+file1 = open("statsBNB_delaty", "w")
 for p, ax in zip(positions, tup):
     a = -3
-    file1.write("########################%s######################" % positionsdico[p])
+    file1.write("########################%s######################\n" % positionsdico[p])
     for name in names:
         openarray = []
         closearray = []
@@ -79,24 +82,29 @@ for p, ax in zip(positions, tup):
 
                 ecart = []
                 for k in range(len(cycle_starts)):
-                    if not np.isnan(abs(np.nanmax(pos[0][cycle_starts[k]:cycle_ends[k]]) - np.nanmin(
-                            pos[0][cycle_starts[k]:cycle_ends[k]]))):
+                    if not np.isnan(abs(np.nanmax(pos[1][cycle_starts[k]:cycle_ends[k]]) - np.nanmin(
+                            pos[1][cycle_starts[k]:cycle_ends[k]]))):
                         if n == 2 or n == 3:
-                            openarray.append(abs(np.nanmax(pos[0][cycle_starts[k]:cycle_ends[k]]) - np.nanmin(
-                                pos[0][cycle_starts[k]:cycle_ends[k]])))
+                            openarray.append(abs(np.nanmax(pos[1][cycle_starts[k]:cycle_ends[k]]) - np.nanmin(
+                                pos[1][cycle_starts[k]:cycle_ends[k]])))
                         if n == 4 or n == 5:
-                            closearray.append(abs(np.nanmax(pos[0][cycle_starts[k]:cycle_ends[k]]) - np.nanmin(
-                                pos[0][cycle_starts[k]:cycle_ends[k]])))
+                            closearray.append(abs(np.nanmax(pos[1][cycle_starts[k]:cycle_ends[k]]) - np.nanmin(
+                                pos[1][cycle_starts[k]:cycle_ends[k]])))
+
         X1 = sm2.DescrStatsW(openarray)
         X2 = sm2.DescrStatsW(closearray)
         Ttest = sm2.CompareMeans(X1, X2)
-        t2, p2 = sc.ttest_ind(openarray, closearray)
+        Txbis, pvalbis = sc.bartlett(openarray, closearray)
+        if pvalbis < 0.05:
+            t2, p2 = sc.ttest_ind(openarray, closearray, equal_var=False)
+        else:
+            t2, p2 = sc.ttest_ind(openarray, closearray)
+        file1.write("pvalue avec ttest_ind est : %f et transforme de pvalue %s \n" % (p2, transformpvalue(p2)))
         file1.write(Ttest.summary(usevar='pooled').as_text() + "\n")
         file1.write("les deux moyennes sont: %f et %f\n" % (np.nanmean(openarray), np.nanmean(closearray)))
-        Txbis, pvalbis = sc.bartlett(openarray, closearray)
+
         file1.write("p_value pour la variance %f \n" % pvalbis)
         file1.write("les deux variances sont %f et %f\n" % (np.nanstd(openarray), np.nanstd(closearray)))
-        file1.write('****transforme de pvalue =%s\n'%transformpvalue(p2))
 
         box = [np.nanmean(openarray), np.nanmean(closearray)]
         box1 = [np.nanstd(openarray), np.nanstd(closearray)]
@@ -106,15 +114,15 @@ for p, ax in zip(positions, tup):
                         label=sujet[name])
         else:
             ax.errorbar(index, box, yerr=box1, linestyle='dotted', color=sujetcolor[name], marker=sujetmarker[name])
-    ax.set_ylim(0.20, 0.55)
+    ax.set_ylim(0.0, 0.15)
     ax.set_xlim(0.85, 2.15)
     ax.set_xticks([1, 2])
     ax.set_xticklabels(["no blind", 'blind'])
     ax.set_title("%s" % positionsdico[p])
     ax.set_ylabel("Amplitude mvt [m]")
     if p == 'UD':
-        ax.legend(loc="lower left")
-        #ax.set_xlabel('blocs(#)')
-fig.suptitle("amplitude x Errorbar all subjects")
-plt.savefig("errorbar_en_x_for_all23.png")
+        ax.legend(loc="upper left")
+        # ax.set_xlabel('blocs(#)')
+fig.suptitle("amplitude y Errorbar all subjects")
+plt.savefig("errorbar_en_y_for_all23.png")
 file1.close()

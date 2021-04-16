@@ -54,7 +54,7 @@ def transformpvalue(p: float):
 
 fig, (ax1, ax2, ax3) = plt.subplots(nrows=3, ncols=1, figsize=(7, 10))
 tup = (ax1, ax2, ax3)
-file1 = open("stats34_delatx", "w")
+file1 = open("stats34_delatz", "w")
 for p, ax in zip(positions, tup):
     file1.write("########################%s######################\n" % positionsdico[p])
     arrayopenall = []
@@ -82,10 +82,10 @@ for p, ax in zip(positions, tup):
 
                 ecart = []
                 for k in range(len(cycle_starts)):
-                    if not np.isnan(abs(np.nanmax(pos[0][cycle_starts[k]:cycle_ends[k]]) - np.nanmin(
-                            pos[0][cycle_starts[k]:cycle_ends[k]]))):
-                        ecart.append(abs(np.nanmax(pos[0][cycle_starts[k]:cycle_ends[k]]) - np.nanmin(
-                            pos[0][cycle_starts[k]:cycle_ends[k]])))
+                    if not np.isnan(abs(np.nanmax(pos[2][cycle_starts[k]:cycle_ends[k]]) - np.nanmin(
+                            pos[2][cycle_starts[k]:cycle_ends[k]]))):
+                        ecart.append(abs(np.nanmax(pos[2][cycle_starts[k]:cycle_ends[k]]) - np.nanmin(
+                            pos[2][cycle_starts[k]:cycle_ends[k]])))
 
                 if n == 2 or n == 3:
                     arrayopen.append(np.nanmean(ecart))
@@ -114,14 +114,14 @@ for p, ax in zip(positions, tup):
     ax.plot(indexgraph2, plotarray2, linestyle='dotted')
     ax.scatter(indexscatter1,arrayopenall , alpha=0.5, s=20)
     ax.scatter(indexscatter2, arraycloseall, alpha=0.5, s=20)
-    ax.text(index[0] + 0.5, 0.48, '%s' % transformpvalue(p2), fontsize=8)
-    ax.set_ylim(0.20, 0.55)
+    ax.text(index[0] + 0.5, 0.13, '%s' % transformpvalue(p2), fontsize=8)
+    ax.set_ylim(0.0, 0.15)
     ax.set_xlim(0.8, 2.2)
     ax.set_xticks([1, 2])
     ax.set_xticklabels(['no blind', 'blind'])
     ax.set_xlim(0.70, 2.30)
     ax.set_title("%s" % positionsdico[p])
-    ax.set_ylabel("Amplitude mvt en X[m]")
-fig.suptitle("amplitude x Errorbar all subjects")
-plt.savefig("34_en_x_for_all.png")
+    ax.set_ylabel("Amplitude mvt[m]")
+fig.suptitle("amplitude z Errorbar all subjects")
+plt.savefig("34_en_z_for_all.png")
 file1.close()
