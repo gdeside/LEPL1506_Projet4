@@ -33,6 +33,11 @@ sujetcolor = {
     "GD": "green",
     "LH": "blueviolet"
 }
+positioncolor={
+"UR": "deeppink",
+    "SP": "black",
+    "UD": "green"
+}
 sujetmarker = {
     "GD": "d",
     "MH": "o",
@@ -44,6 +49,11 @@ indexsubject = {
     "MH": [7, 8],
     "LH": [5, 6],
     "PDs": [3, 4]
+}
+indexposition={
+    'UD':[5, 6],
+    'UR':[1,2],
+    'SP':[3,4]
 }
 
 
@@ -66,13 +76,12 @@ GF = glm_df.loc[:, 'GF'].to_numpy()
 meanlucile = np.nanmean(GF[baseline])
 ##
 
-fig, (ax1, ax2, ax3) = plt.subplots(nrows=3, ncols=1, figsize=(7, 10))
-tup = (ax1, ax2, ax3)
-for p, ax in zip(positions, tup):
+
+for p in positions:
     a = -3
+    openarray1 = []
+    openarray2 = []
     for name in names:
-        openarray1 = []
-        openarray2 = []
         a += 1
         for n in ntrials:
             glm_path = "../../data/%s_%s_00%d.glm" % (name, p, n)
@@ -151,42 +160,32 @@ for p, ax in zip(positions, tup):
                 if n == 5 or n == 4:
                     openarray2.append(np.nanmax(GF[id]))
 
-        X1 = sm2.DescrStatsW(openarray1)
-        X2 = sm2.DescrStatsW(openarray2)
-        Ttest = sm2.CompareMeans(X1, X2)
-        t2, p2 = sc.ttest_ind(openarray1, openarray2)
-        Txbis, pvalbis = sc.bartlett(openarray1, openarray2)
-        box = [np.nanmean(openarray1), np.nanmean(openarray2)]
-        box1 = [np.nanstd(openarray1), np.nanstd(openarray2)]
-        index = indexsubject[name]
-        indexgraph1 = np.linspace(index[0] - 0.25, index[0] + 0.25, 50)
-        plotarray1 = np.zeros(50) + box[0]
-        indexgraph2 = np.linspace(index[1] - 0.25, index[1] + 0.25, 50)
-        plotarray2 = np.zeros(50) + box[1]
-        indexscatter1 = np.zeros(len(openarray1)) + index[0]
-        indexscatter2 = np.zeros(len(openarray2)) + index[1]
-        if ax == ax3:
-            ax.plot(indexgraph1, plotarray1, linestyle='dotted', color=sujetcolor[name],
-                    label=sujet[name])
-            ax.scatter(indexscatter1, openarray1, color=sujetcolor[name], alpha=0.5, s=20)
-            ax.plot(indexgraph2, plotarray2, linestyle='dotted', color=sujetcolor[name])
-            ax.scatter(indexscatter2, openarray2, color=sujetcolor[name], alpha=0.5, s=20)
-            ax.text(index[0] + 0.5, 19, '%s' % transformpvalue(p2), fontsize=13)
-        else:
-            ax.plot(indexgraph1, plotarray1, linestyle='dotted', color=sujetcolor[name])
-            ax.scatter(indexscatter1, openarray1, color=sujetcolor[name], alpha=0.5, s=20)
-            ax.plot(indexgraph2, plotarray2, linestyle='dotted', color=sujetcolor[name])
-            ax.scatter(indexscatter2, openarray2, color=sujetcolor[name], alpha=0.5, s=20)
-            ax.text(index[0] + 0.5, 19, '%s' % transformpvalue(p2), fontsize=13)
-    ax.set_ylim(3.0, 22)
-    ax.set_xlim(0.85, 2.15)
-    ax.set_xticks([1, 2, 3, 4, 5, 6, 7, 8])
-    ax.set_xlim(0.5, 8.5)
-    ax.set_xticklabels(["1er bloc", '2em bloc', "1er bloc", '2em bloc', "1er bloc", '2em bloc', "1er bloc", '2em bloc'])
-    ax.set_title("%s" % positionsdico[p])
-    ax.set_ylabel("GF[N]")
-    if p == 'UD':
-        ax.legend(loc="lower right")
+    X1 = sm2.DescrStatsW(openarray1)
+    X2 = sm2.DescrStatsW(openarray2)
+    Ttest = sm2.CompareMeans(X1, X2)
+    t2, p2 = sc.ttest_ind(openarray1, openarray2)
+    Txbis, pvalbis = sc.bartlett(openarray1, openarray2)
+    box = [np.nanmean(openarray1), np.nanmean(openarray2)]
+    box1 = [np.nanstd(openarray1), np.nanstd(openarray2)]
+    index = indexposition[p]
+    indexgraph1 = np.linspace(index[0] - 0.25, index[0] + 0.25, 50)
+    plotarray1 = np.zeros(50) + box[0]
+    indexgraph2 = np.linspace(index[1] - 0.25, index[1] + 0.25, 50)
+    plotarray2 = np.zeros(50) + box[1]
+    indexscatter1 = np.zeros(len(openarray1)) + index[0]
+    indexscatter2 = np.zeros(len(openarray2)) + index[1]
+
+    plt.plot(indexgraph1, plotarray1, linestyle='dotted', color=positioncolor[p],label=positionsdico[p])
+    plt.scatter(indexscatter1, openarray1, color=positioncolor[p], alpha=0.5, s=20)
+    plt.plot(indexgraph2, plotarray2, linestyle='dotted', color=positioncolor[p])
+    plt.scatter(indexscatter2, openarray2, color=positioncolor[p], alpha=0.5, s=20)
+    plt.text(index[0] + 0.5, 19, '%s' % transformpvalue(p2), fontsize=13)
+    plt.ylim(3.0, 22)
+    plt.xlim(0.85, 2.15)
+    plt.xticks([1, 2, 3, 4, 5, 6],["no blind", 'blind',"no blind", 'blind',"no blind", 'blind'])
+    plt.xlim(0.5, 7.0)
+    plt.ylabel("GF[N]")
+    plt.legend(loc="lower right")
         # ax.set_xlabel('blocs(#)')
-fig.suptitle("Comparaison De la moyenne de la GF max en condition yeux ouvert")
-plt.savefig("errorbar_en_GF_for_allpvalue.png")
+plt.title("Comparaison De la moyenne de la GF max entre chaque position et les deux conditions")
+plt.savefig("errorbar_en_GF_for_allposstion.png")
