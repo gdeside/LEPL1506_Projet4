@@ -11,7 +11,7 @@ import processing_tools as tool
 
 import glm_data_processing as glm
 
-ntrials = [2, 3, 4, 5]  # /!\ changer noms de fichiers
+ntrials = [4, 5]  # /!\ changer noms de fichiers
 positions = ['UR', 'SP', 'UD']
 names = ['GD', 'PDs', 'LH', 'MH']
 colors = ['plum', 'aquamarine', 'aquamarine', 'royalblue', 'royalblue']
@@ -146,9 +146,9 @@ for p, ax in zip(positions, tup):
             GFmax = []
             for i in range(len(cycle_starts)):
                 id = np.where((time > time1[cycle_starts[i]]) & (time < time1[cycle_ends[i]]))
-                if n==2:
+                if n == 4:
                     openarray1.append(np.nanmax(GF[id]))
-                if n==3:
+                if n == 5:
                     openarray2.append(np.nanmax(GF[id]))
 
         X1 = sm2.DescrStatsW(openarray1)
@@ -165,7 +165,7 @@ for p, ax in zip(positions, tup):
         plotarray2 = np.zeros(50) + box[1]
         indexscatter1 = np.zeros(len(openarray1)) + index[0]
         indexscatter2 = np.zeros(len(openarray2)) + index[1]
-        if ax == ax1:
+        if ax == ax3:
             ax.plot(indexgraph1, plotarray1, linestyle='dotted', color=sujetcolor[name],
                     label=sujet[name])
             ax.scatter(indexscatter1, openarray1, color=sujetcolor[name], alpha=0.5, s=20)
@@ -182,11 +182,11 @@ for p, ax in zip(positions, tup):
     ax.set_xlim(0.85, 2.15)
     ax.set_xticks([1, 2, 3, 4, 5, 6, 7, 8])
     ax.set_xlim(0.5, 8.5)
-    ax.set_xticklabels(["1er no blind", '2em no blind', "1er no blind", '2em no blind', "1er no blind", '2em no blind', "1er no blind", '2em no blind'])
+    ax.set_xticklabels(["1er bloc", '2em bloc', "1er bloc", '2em bloc', "1er bloc", '2em bloc', "1er bloc", '2em bloc'])
     ax.set_title("%s" % positionsdico[p])
     ax.set_ylabel("GF[N]")
-    if p == 'UR':
-        ax.legend(loc="upper left")
+    if p == 'UD':
+        ax.legend(loc="lower right")
         # ax.set_xlabel('blocs(#)')
-fig.suptitle("GF Errorbar all subjects")
+fig.suptitle("Comparaison De la moyenne de la GF max en condition yeux ouvert")
 plt.savefig("errorbar_en_GF_for_allpvalue.png")
