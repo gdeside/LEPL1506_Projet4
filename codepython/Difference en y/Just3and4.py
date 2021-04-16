@@ -40,9 +40,7 @@ sujetmarker = {
 
 
 def transformpvalue(p: float):
-    if p < 0.0001:
-        return "****"
-    elif p < 0.001:
+    if p < 0.001:
         return "***"
     elif p < 0.01:
         return "**"
@@ -114,7 +112,7 @@ for p, ax in zip(positions, tup):
     ax.plot(indexgraph2, plotarray2, linestyle='dotted')
     ax.scatter(indexscatter1,arrayopenall , alpha=0.5, s=20)
     ax.scatter(indexscatter2, arraycloseall, alpha=0.5, s=20)
-    ax.text(index[0] + 0.5, 0.13, '%s' % transformpvalue(p2), fontsize=8)
+    ax.text(index[0] + 0.5, 0.13, '%s' % transformpvalue(p2), fontsize=13)
     ax.set_ylim(0.0, 0.15)
     ax.set_xlim(0.8, 2.2)
     ax.set_xticks([1, 2])

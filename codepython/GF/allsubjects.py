@@ -36,6 +36,13 @@ sujetmarker={
     "LH":"s",
     "PDs":"*"
 }
+###meanlucile
+glm_path = "../../data/%s_%s_00%d.glm" % ('LH', 'UD',5)
+glm_df = glm.import_data(glm_path)
+baseline = range(101, 400)
+GF = glm_df.loc[:, 'GF'].to_numpy()
+meanlucile = np.nanmean(GF[baseline])
+##
 
 fig, (ax1, ax2, ax3) = plt.subplots(nrows=3, ncols=1, figsize=(7, 10))
 tup = (ax1, ax2, ax3)
@@ -69,8 +76,12 @@ for p, ax in zip(positions, tup):
             time = glm_df.loc[:, 'time'].to_numpy()
             accX = glm_df.loc[:, 'LowAcc_X'].to_numpy() * (-9.81)
             accX = accX - np.nanmean(accX[baseline])
-            GF = glm_df.loc[:, 'GF'].to_numpy()
-            GF = GF - np.nanmean(GF[baseline])
+            if name == 'LH' and p == 'UD':
+                GF = glm_df.loc[:, 'GF'].to_numpy()
+                GF = GF - meanlucile
+            else:
+                GF = glm_df.loc[:, 'GF'].to_numpy()
+                GF = GF - np.nanmean(GF[baseline])
             LFv = TFx_thumb + TFx_index
             LFh = TFz_thumb + TFz_index
             LF = np.hypot(LFv, LFh)

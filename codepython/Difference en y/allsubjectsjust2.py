@@ -40,9 +40,7 @@ sujetmarker = {
 
 
 def transformpvalue(p: float):
-    if p < 0.0001:
-        return "****"
-    elif p < 0.001:
+    if p < 0.001:
         return "***"
     elif p < 0.01:
         return "**"

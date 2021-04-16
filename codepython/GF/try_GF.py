@@ -12,17 +12,25 @@ ntrials = 5  # /!\ changer noms de fichiers
 positions = ['UR', 'SP', 'UD']
 names = ['PDS', 'GD', 'MH', 'LH']
 sujet = {
-  "GD": "Sujet 1",
-  "LH": "Sujet 3",
-  "PDS": "Sujet 2",
+    "GD": "Sujet 1",
+    "LH": "Sujet 3",
+    "PDS": "Sujet 2",
     "MH": "Sujet 4"
 }
-positionsdico={
+positionsdico = {
     "SP": "Supine",
-    "UD":"UpsideDown",
-    "UR":"UpRight"
+    "UD": "UpsideDown",
+    "UR": "UpRight"
 }
+indextrial=[0,1,2,3,4,5]
 
+###meanlucile
+glm_path = "../../data/%s_%s_00%d.glm" % ('LH', 'UD',5)
+glm_df = glm.import_data(glm_path)
+baseline = range(101, 400)
+GF = glm_df.loc[:, 'GF'].to_numpy()
+meanlucile = np.nanmean(GF[baseline])
+##
 for name in names:
     GFmean = []
     index = []
@@ -31,7 +39,7 @@ for name in names:
     for p in positions:
         a += 1
         fig = plt.figure(figsize=[15, 7])
-        for n in range(1, ntrials + 1):
+        for n in range(1,ntrials+1):
             glm_path = "../../data/%s_%s_00%d.glm" % (name, p, n)
             if not path.exists(glm_path):
                 continue
@@ -56,8 +64,12 @@ for name in names:
             time = glm_df.loc[:, 'time'].to_numpy()
             accX = glm_df.loc[:, 'LowAcc_X'].to_numpy() * (-9.81)
             accX = accX - np.nanmean(accX[baseline])
-            GF = glm_df.loc[:, 'GF'].to_numpy()
-            GF = GF - np.nanmean(GF[baseline])
+            if name == 'LH' and p == 'UD':
+                GF = glm_df.loc[:, 'GF'].to_numpy()
+                GF = GF - meanlucile
+            else:
+                GF = glm_df.loc[:, 'GF'].to_numpy()
+                GF = GF - np.nanmean(GF[baseline])
             LFv = TFx_thumb + TFx_index
             LFh = TFz_thumb + TFz_index
             LF = np.hypot(LFv, LFh)
@@ -101,15 +113,13 @@ for name in names:
                 id = np.where((time > time1[cycle_starts[i]]) & (time < time1[cycle_ends[i]]))
                 GFmax.append(np.nanmax(GF[id]))
             index.append(n + a * 5)
-            #if name == "LH" and (n == 2 or n == 3) and p=="UD":
-                #GFmax += (np.nanmean(GFmean)-np.nanmean(GFmax))
             GFmean.append(np.mean(GFmax))
             GFstd.append(np.std(GFmax))
 
-    plt.errorbar(index, GFmean, yerr=GFstd,linestyle='dotted')
+    plt.errorbar(index, GFmean, yerr=GFstd, linestyle='dotted')
     plt.ylabel("GF[N]")
     plt.xlabel("essais(#)")
-    plt.xticks([0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16])
+    plt.xticks([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16])
     plt.title("Moyenne et ecart type: GFmax pour les diférrents essais pour {}".format(sujet[name]))
     plt.axvspan(0.5, 1.50, facecolor='steelblue', alpha=0.5, label='UR train')
     plt.axvspan(1.50, 3.50, facecolor='steelblue', alpha=0.5, label='UR no blind')
@@ -121,4 +131,4 @@ for name in names:
     plt.axvspan(11.50, 13.5, facecolor='khaki', alpha=0.5, label='UD no blind')
     plt.axvspan(13.50, 15.5, facecolor='khaki', alpha=0.8, label='UD blind')
     plt.legend()
-    plt.savefig("meanGFmax_%s.png" % name)
+    plt.savefig("trywith0_%s.png" % name)

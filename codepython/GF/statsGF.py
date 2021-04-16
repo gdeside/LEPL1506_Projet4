@@ -10,7 +10,7 @@ import coda_tools as coda
 import processing_tools as tool
 import glm_data_processing as glm
 
-ntrials = [ 4, 5]  # /!\ changer noms de fichiers
+ntrials = [4, 5]  # /!\ changer noms de fichiers
 positions = ['UR', 'SP', 'UD']
 names = ['GD', 'PDs', 'LH', 'MH']
 colors = ['plum', 'aquamarine', 'aquamarine', 'royalblue', 'royalblue']
@@ -26,19 +26,18 @@ positionsdico = {
     "UR": "UpRight"
 }
 
-sujetcolor={
-    "PDs":"deeppink",
+sujetcolor = {
+    "PDs": "deeppink",
     "MH": "black",
-    "GD":"green",
-    "LH":"blueviolet"
+    "GD": "green",
+    "LH": "blueviolet"
 }
-sujetmarker={
-    "GD":"d",
-    "MH":"o",
-    "LH":"s",
-    "PDs":"*"
+sujetmarker = {
+    "GD": "d",
+    "MH": "o",
+    "LH": "s",
+    "PDs": "*"
 }
-
 
 for p in positions:
     for name in names:
@@ -103,17 +102,14 @@ for p in positions:
                 cycle_starts = ipk[:-1]
                 cycle_ends = ipk[1:] - 1
 
-
                 for i in range(len(cycle_starts)):
                     id = np.where((time > time1[cycle_starts[i]]) & (time < time1[cycle_ends[i]]))
-                    if n==5:
+                    if n == 5:
                         box.append(np.nanmax(GF[id]))
-                    if n==4:
+                    if n == 4:
                         box1.append(np.nanmax(GF[id]))
-        X1=sm2.DescrStatsW(box)
-        X2=sm2.DescrStatsW(box1)
-        Ttest=sm2.CompareMeans(X1,X2)
-        print(name+" "+p)
+        X1 = sm2.DescrStatsW(box)
+        X2 = sm2.DescrStatsW(box1)
+        Ttest = sm2.CompareMeans(X1, X2)
+        print(name + " " + p)
         print(Ttest.summary(usevar='pooled').as_text())
-
-

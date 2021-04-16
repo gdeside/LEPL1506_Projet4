@@ -46,9 +46,7 @@ indexsubject = {
 
 
 def transformpvalue(p: float):
-    if p < 0.0001:
-        return "****"
-    elif p < 0.001:
+    if p < 0.001:
         return "***"
     elif p < 0.01:
         return "**"
@@ -114,13 +112,13 @@ for p, ax in zip(positions, tup):
             ax.scatter(indexscatter1, openarray, color=sujetcolor[name], alpha=0.5,s=20)
             ax.plot(indexgraph2, plotarray2, linestyle='dotted', color=sujetcolor[name])
             ax.scatter(indexscatter2, closearray, color=sujetcolor[name], alpha=0.5,s=20)
-            ax.text(index[0] + 0.5, 0.45, '%s' % transformpvalue(p2), fontsize=8)
+            ax.text(index[0] + 0.5, 0.45, '%s' % transformpvalue(p2), fontsize=13)
         else:
             ax.plot(indexgraph1, plotarray1, linestyle='dotted', color=sujetcolor[name])
             ax.scatter(indexscatter1, openarray, color=sujetcolor[name], alpha=0.5,s=20)
             ax.plot(indexgraph2, plotarray2, linestyle='dotted', color=sujetcolor[name])
             ax.scatter(indexscatter2, closearray, color=sujetcolor[name], alpha=0.5,s=20)
-            ax.text(index[0] + 0.5, 0.48, '%s' % transformpvalue(p2), fontsize=8)
+            ax.text(index[0] + 0.5, 0.48, '%s' % transformpvalue(p2), fontsize=13)
     ax.set_ylim(0.20, 0.55)
     ax.set_xlim(0.85, 2.15)
     ax.set_xticks([1, 2, 3, 4, 5, 6, 7, 8])
