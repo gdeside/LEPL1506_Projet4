@@ -119,7 +119,7 @@ for p, ax in zip(positions, tup):
     ax.set_xticks([1, 2])
     ax.set_xticklabels(['no blind', 'blind'])
     ax.set_xlim(0.70, 2.30)
-    ax.set_title("%s" % positionsdico[p])
+    ax.set_title("%s" % positionsdico[p],fontweight='bold')
     ax.set_ylabel("Amplitude mvt[m]")
 fig.suptitle("amplitude z Errorbar all subjects")
 plt.savefig("34_en_z_for_all.png")

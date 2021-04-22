@@ -27,7 +27,7 @@ subset #1      0.0351      0.005      6.557      0.000       0.024       0.046
 les deux moyennes sont: 0.407311 et 0.372235
 p_value pour la variance 0.000378 
 les deux variances sont 0.011430 et 0.024180
-****transforme de pvalue =****
+****transforme de pvalue =***
                           Test for equality of means                          
 ==============================================================================
                  coef    std err          t      P>|t|      [0.025      0.975]
@@ -47,7 +47,7 @@ subset #1      0.1125      0.007     15.445      0.000       0.098       0.127
 les deux moyennes sont: 0.400455 et 0.287985
 p_value pour la variance 0.000000 
 les deux variances sont 0.008746 et 0.035345
-****transforme de pvalue =****
+****transforme de pvalue =***
                           Test for equality of means                          
 ==============================================================================
                  coef    std err          t      P>|t|      [0.025      0.975]
@@ -57,7 +57,7 @@ subset #1      0.0656      0.015      4.519      0.000       0.036       0.095
 les deux moyennes sont: 0.452798 et 0.387169
 p_value pour la variance 0.000004 
 les deux variances sont 0.025467 et 0.068397
-****transforme de pvalue =****
+****transforme de pvalue =***
                           Test for equality of means                          
 ==============================================================================
                  coef    std err          t      P>|t|      [0.025      0.975]
@@ -67,7 +67,7 @@ subset #1      0.0298      0.006      4.883      0.000       0.018       0.042
 les deux moyennes sont: 0.411163 et 0.381336
 p_value pour la variance 0.042733 
 les deux variances sont 0.017128 et 0.025784
-****transforme de pvalue =****
+****transforme de pvalue =***
                           Test for equality of means                          
 ==============================================================================
                  coef    std err          t      P>|t|      [0.025      0.975]
@@ -87,7 +87,7 @@ subset #1      0.1014      0.006     16.374      0.000       0.089       0.114
 les deux moyennes sont: 0.395769 et 0.294372
 p_value pour la variance 0.000005 
 les deux variances sont 0.009963 et 0.028062
-****transforme de pvalue =****
+****transforme de pvalue =***
                           Test for equality of means                          
 ==============================================================================
                  coef    std err          t      P>|t|      [0.025      0.975]
@@ -97,7 +97,7 @@ subset #1      0.0674      0.007      9.670      0.000       0.053       0.081
 les deux moyennes sont: 0.437470 et 0.370093
 p_value pour la variance 0.009592 
 les deux variances sont 0.017604 et 0.030064
-****transforme de pvalue =****
+****transforme de pvalue =***
                           Test for equality of means                          
 ==============================================================================
                  coef    std err          t      P>|t|      [0.025      0.975]
@@ -117,4 +117,4 @@ subset #1      0.1112      0.008     13.490      0.000       0.094       0.128
 les deux moyennes sont: 0.430348 et 0.319156
 p_value pour la variance 0.001854 
 les deux variances sont 0.009866 et 0.026591
-****transforme de pvalue =****
+****transforme de pvalue =***

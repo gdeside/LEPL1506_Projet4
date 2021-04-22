@@ -11,7 +11,7 @@ import processing_tools as tool
 
 import glm_data_processing as glm
 
-ntrials = [2, 3, 4, 5]  # /!\ changer noms de fichiers
+ntrials = [2, 3]  # /!\ changer noms de fichiers
 positions = ['UR', 'SP', 'UD']
 names = ['GD', 'PDs', 'LH', 'MH']
 colors = ['plum', 'aquamarine', 'aquamarine', 'royalblue', 'royalblue']
@@ -146,9 +146,9 @@ for p, ax in zip(positions, tup):
             GFmax = []
             for i in range(len(cycle_starts)):
                 id = np.where((time > time1[cycle_starts[i]]) & (time < time1[cycle_ends[i]]))
-                if n == 2 or n == 3:
+                if n == 2 or n == 4:
                     openarray1.append(np.nanmax(GF[id]))
-                if n == 5 or n == 4:
+                if n == 5 or n == 3:
                     openarray2.append(np.nanmax(GF[id]))
 
         X1 = sm2.DescrStatsW(openarray1)
@@ -171,22 +171,24 @@ for p, ax in zip(positions, tup):
             ax.scatter(indexscatter1, openarray1, color=sujetcolor[name], alpha=0.5, s=20)
             ax.plot(indexgraph2, plotarray2, linestyle='dotted', color=sujetcolor[name])
             ax.scatter(indexscatter2, openarray2, color=sujetcolor[name], alpha=0.5, s=20)
-            ax.text(index[0] + 0.5, 19, '%s' % transformpvalue(p2), fontsize=13)
+            ax.text(index[0] + 0.25, 21, 'mean:%s' % transformpvalue(p2), fontsize=13)
+            ax.text(index[0] + 0.25, 19, 'std:%s' % transformpvalue(pvalbis), fontsize=13)
         else:
             ax.plot(indexgraph1, plotarray1, linestyle='dotted', color=sujetcolor[name])
             ax.scatter(indexscatter1, openarray1, color=sujetcolor[name], alpha=0.5, s=20)
             ax.plot(indexgraph2, plotarray2, linestyle='dotted', color=sujetcolor[name])
             ax.scatter(indexscatter2, openarray2, color=sujetcolor[name], alpha=0.5, s=20)
-            ax.text(index[0] + 0.5, 19, '%s' % transformpvalue(p2), fontsize=13)
-    ax.set_ylim(3.0, 22)
+            ax.text(index[0] + 0.25, 21, 'mean:%s' % transformpvalue(p2), fontsize=13)
+            ax.text(index[0] + 0.25, 19, 'std:%s' % transformpvalue(pvalbis), fontsize=13)
+    ax.set_ylim(3.0, 23)
     ax.set_xlim(0.85, 2.15)
     ax.set_xticks([1, 2, 3, 4, 5, 6, 7, 8])
     ax.set_xlim(0.5, 8.5)
     ax.set_xticklabels(["1er bloc", '2em bloc', "1er bloc", '2em bloc', "1er bloc", '2em bloc', "1er bloc", '2em bloc'])
-    ax.set_title("%s" % positionsdico[p])
+    ax.set_title("%s" % positionsdico[p],fontweight='bold')
     ax.set_ylabel("GF[N]")
     if p == 'UD':
-        ax.legend(loc="lower right")
+        ax.legend(loc="lower right", prop={'size': 8})
         # ax.set_xlabel('blocs(#)')
 fig.suptitle("Comparaison De la moyenne de la GF max en condition yeux ouvert")
 plt.savefig("errorbar_en_GF_for_allpvalue.png")

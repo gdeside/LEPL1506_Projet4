@@ -112,8 +112,8 @@ for p, ax in zip(positions, tup):
             ax.scatter(indexscatter1, openarray, color=sujetcolor[name], alpha=0.5,s=20)
             ax.plot(indexgraph2, plotarray2, linestyle='dotted', color=sujetcolor[name])
             ax.scatter(indexscatter2, closearray, color=sujetcolor[name], alpha=0.5,s=20)
-            ax.text(index[0] + 0.25, 0.10, 'means:%s' % transformpvalue(p2), fontsize=11)
-            ax.text(index[0] + 0.25, 0.075, 'sted:%s' % transformpvalue(pvalbis), fontsize=11)
+            ax.text(index[0] + 0.25, 0.10, 'mean:%s' % transformpvalue(p2), fontsize=11)
+            ax.text(index[0] + 0.25, 0.075, 'std:%s' % transformpvalue(pvalbis), fontsize=11)
         else:
             ax.plot(indexgraph1, plotarray1, linestyle='dotted', color=sujetcolor[name])
             ax.scatter(indexscatter1, openarray, color=sujetcolor[name], alpha=0.5,s=20)
@@ -126,7 +126,7 @@ for p, ax in zip(positions, tup):
     ax.set_xticks([1, 2, 3, 4, 5, 6, 7, 8])
     ax.set_xlim(0.5, 8.5)
     ax.set_xticklabels(["no blind", 'blind', "no blind", 'blind', "no blind", 'blind', "no blind", 'blind'])
-    ax.set_title("%s" % positionsdico[p])
+    ax.set_title("%s" % positionsdico[p],fontweight='bold')
     ax.set_ylabel("Amplitude mvt [m]")
     if p == 'UR':
         ax.legend(loc="upper left")

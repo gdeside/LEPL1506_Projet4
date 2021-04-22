@@ -11,7 +11,7 @@ import processing_tools as tool
 
 import glm_data_processing as glm
 
-ntrials = [2, 3, 4, 5]  # /!\ changer noms de fichiers
+ntrials = [2, 3]  # /!\ changer noms de fichiers
 positions = ['UR', 'SP', 'UD']
 names = ['GD', 'PDs', 'LH', 'MH']
 colors = ['plum', 'aquamarine', 'aquamarine', 'royalblue', 'royalblue']
@@ -63,16 +63,16 @@ glm_path = "../../data/%s_%s_00%d.glm" % ('LH', 'UD', 5)
 glm_df = glm.import_data(glm_path)
 baseline = range(101, 400)
 GF = glm_df.loc[:, 'GF'].to_numpy()
-meanlucile = np.nanmean(GF[baseline])
+meanlucileGF = np.nanmean(GF[baseline])
 ##
 
 fig, (ax1, ax2, ax3) = plt.subplots(nrows=3, ncols=1, figsize=(7, 10))
 tup = (ax1, ax2, ax3)
 for p, ax in zip(positions, tup):
     a = -3
-    openarray1 = []
-    openarray2 = []
     for name in names:
+        openarray1 = []
+        openarray2 = []
         a += 1
         for n in ntrials:
             glm_path = "../../data/%s_%s_00%d.glm" % (name, p, n)
@@ -80,7 +80,10 @@ for p, ax in zip(positions, tup):
                 continue
 
             glm_df = glm.import_data(glm_path)
-            baseline = range(0, 400)
+            if name == 'LH' and p == 'UD':
+                baseline = range(101, 400)
+            else:
+                baseline = range(0, 400)
             # Normal Force exerted by the thumb
             NF_thumb = glm_df.loc[:, 'Fygl'] - np.nanmean(glm_df.loc[baseline, 'Fygl'])
             # Vertical Tangential Force exerted by the thumb
@@ -101,7 +104,7 @@ for p, ax in zip(positions, tup):
             accX = accX - np.nanmean(accX[baseline])
             if name == 'LH' and p == 'UD':
                 GF = glm_df.loc[:, 'GF'].to_numpy()
-                GF = GF - meanlucile
+                GF = GF - meanlucileGF
             else:
                 GF = glm_df.loc[:, 'GF'].to_numpy()
                 GF = GF - np.nanmean(GF[baseline])
@@ -146,10 +149,10 @@ for p, ax in zip(positions, tup):
             GFmax = []
             for i in range(len(cycle_starts)):
                 id = np.where((time > time1[cycle_starts[i]]) & (time < time1[cycle_ends[i]]))
-                if n == 2 or n == 3:
-                    openarray1.append(np.nanmax(GF[id]))
-                if n == 5 or n == 4:
-                    openarray2.append(np.nanmax(GF[id]))
+                if n == 2 or n == 4:
+                    openarray1.append(np.nanmax(GF[id])/np.nanmax(LF[id]))
+                if n == 5 or n == 3:
+                    openarray2.append(np.nanmax(GF[id])/np.nanmax(LF[id]))
 
         X1 = sm2.DescrStatsW(openarray1)
         X2 = sm2.DescrStatsW(openarray2)
@@ -171,24 +174,24 @@ for p, ax in zip(positions, tup):
             ax.scatter(indexscatter1, openarray1, color=sujetcolor[name], alpha=0.5, s=20)
             ax.plot(indexgraph2, plotarray2, linestyle='dotted', color=sujetcolor[name])
             ax.scatter(indexscatter2, openarray2, color=sujetcolor[name], alpha=0.5, s=20)
-            ax.text(index[0] + 0.25, 21, 'mean:%s' % transformpvalue(p2), fontsize=13)
-            ax.text(index[0] + 0.25, 19, 'std:%s' % transformpvalue(pvalbis), fontsize=13)
+            ax.text(index[0] + 0.25, 10, 'mean:%s' % transformpvalue(p2), fontsize=13)
+            ax.text(index[0] + 0.25, 7.5, 'std:%s' % transformpvalue(pvalbis), fontsize=13)
         else:
             ax.plot(indexgraph1, plotarray1, linestyle='dotted', color=sujetcolor[name])
             ax.scatter(indexscatter1, openarray1, color=sujetcolor[name], alpha=0.5, s=20)
             ax.plot(indexgraph2, plotarray2, linestyle='dotted', color=sujetcolor[name])
             ax.scatter(indexscatter2, openarray2, color=sujetcolor[name], alpha=0.5, s=20)
-            ax.text(index[0] + 0.25, 21, 'mean:%s' % transformpvalue(p2), fontsize=13)
-            ax.text(index[0] + 0.25, 19, 'std:%s' % transformpvalue(pvalbis), fontsize=13)
-    ax.set_ylim(3.0, 23)
+            ax.text(index[0] + 0.25, 10, 'mean:%s' % transformpvalue(p2), fontsize=13)
+            ax.text(index[0] + 0.25, 7.5, 'std:%s' % transformpvalue(pvalbis), fontsize=13)
+    ax.set_ylim(0, 11)
     ax.set_xlim(0.85, 2.15)
     ax.set_xticks([1, 2, 3, 4, 5, 6, 7, 8])
     ax.set_xlim(0.5, 8.5)
-    ax.set_xticklabels(["no blind", 'blind',"no blind", 'blind',"no blind", 'blind',"no blind",'blind'])
+    ax.set_xticklabels(["1er bloc", '2em bloc', "1er bloc", '2em bloc', "1er bloc", '2em bloc', "1er bloc", '2em bloc'])
     ax.set_title("%s" % positionsdico[p],fontweight='bold')
-    ax.set_ylabel("GF[N]")
+    ax.set_ylabel("GF/LF")
     if p == 'UD':
-        ax.legend(loc="lower left",prop={'size': 8})
+        ax.legend(loc="lower right", prop={'size': 8})
         # ax.set_xlabel('blocs(#)')
-fig.suptitle("Comparaison De la moyenne de la GF max entre les deux conditions")
-plt.savefig("errorbar_en_GF_for_allpvaluebindnobind.png")
+fig.suptitle("Comparaison De la moyenne de la GFmax sur LFmax en condition yeux ouvert")
+plt.savefig("errorbar_en_GFonLF_for_allpvalue.png")

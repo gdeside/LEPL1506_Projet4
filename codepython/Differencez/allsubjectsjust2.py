@@ -98,7 +98,7 @@ for p, ax in zip(positions, tup):
     ax.set_xlim(0.85, 2.15)
     ax.set_xticks([1, 2])
     ax.set_xticklabels(["no blind", 'blind'])
-    ax.set_title("%s" % positionsdico[p])
+    ax.set_title("%s" % positionsdico[p],fontweight='bold')
     ax.set_ylabel("Amplitude mvt [m]")
     if p == 'UD':
         ax.legend(loc="upper left")

@@ -14,7 +14,7 @@ import processing_tools as tool
 
 ntrials = 5  # /!\ changer noms de fichiers
 positions = ["UR", 'SP', 'UD']
-names = ['PDS','GD','LH','MH']
+names = ['LH','MH']
 
 for name in names:
     for p in positions:
@@ -77,7 +77,7 @@ for name in names:
             vel = tool.derive(pos, 200, axis=1)
 
             # %% CUTTING THE TASK INTO SEGMENTS (your first task)
-            pk = signal.find_peaks(vel[0], prominence=1, width=(100, 1000))
+            pk = signal.find_peaks(vel[0], prominence=1, width=(100, 850))
             ipk = pk[0]  # index
             cycle_starts = ipk[:-1]
             cycle_ends = ipk[1:] - 1
