@@ -11,7 +11,7 @@ import processing_tools as tool
 
 import glm_data_processing as glm
 
-ntrials = [2, 3]  # /!\ changer noms de fichiers
+ntrials = [4, 5]  # /!\ changer noms de fichiers
 positions = ['UR', 'SP', 'UD']
 names = ['GD', 'PDs', 'LH', 'MH']
 colors = ['plum', 'aquamarine', 'aquamarine', 'royalblue', 'royalblue']
@@ -193,5 +193,5 @@ for p, ax in zip(positions, tup):
     if p == 'UD':
         ax.legend(loc="lower right", prop={'size': 8})
         # ax.set_xlabel('blocs(#)')
-fig.suptitle("Comparaison De la moyenne de la GFmax sur LFmax en condition yeux ouvert")
-plt.savefig("errorbar_en_GFonLF_for_allpvalue.png")
+fig.suptitle("Comparaison De la moyenne de la GFmax sur LFmax en condition yeux fermés")
+plt.savefig("errorbar_en_GFonLF_for_allpvalueblind.png")
