@@ -14,6 +14,17 @@ plt.close('all')
 
 names = ["GD", "LH", "PDs", "MH"]
 positions = ["UR", "SP", "UD"]
+sujet = {
+    "GD": "Sujet 1",
+    "LH": "Sujet 3",
+    "PDs": "Sujet 2",
+    "MH": "Sujet 4"
+}
+positionsdico = {
+    "SP": "Supine",
+    "UD": "UpsideDown",
+    "UR": "UpRight"
+}
 
 ntrials = 5  # /!\ changer noms de fichiers
 meanlucile = 0
@@ -85,7 +96,7 @@ for n in names:
                 gf3_bind2.append(LF)
         if n == "MH" and pos == "UD":
             fig = plt.figure(figsize=[15, 7])
-            plt.title("figures pour %s : LF en fonction du temps en postion %s.png" % (n, pos))
+            plt.title("figures pour %s : LF en fonction du temps en postion %s" % (n, pos))
             plt.plot(time, np.mean(gf3_bind1, axis=0), label="GF_bind1")
             plt.legend()
             plt.xlabel("time[s]")
@@ -93,7 +104,7 @@ for n in names:
             fig.savefig("%s_LF_%s.png" % (n, pos))
             continue
         fig = plt.figure(figsize=[15, 7])
-        plt.title("figures pour %s : LF en fonction du temps en postion %s.png" % (n, pos))
+        plt.title("figures pour %s : LF en fonction du temps en postion %s" % (sujet[n], positionsdico[pos]))
         plt.plot(time, np.mean(gf_nobind1, axis=0), label="LF_noblind1")
         plt.plot(time, np.mean(gf_nobind2, axis=0), label="LF_noblind2")
         plt.plot(time, np.mean(gf3_bind1, axis=0), label="LF_blind1")
@@ -101,4 +112,5 @@ for n in names:
         plt.legend()
         plt.xlabel("time[s]")
         plt.ylabel("LF[N]")
+        plt.ylim(0,5)
         fig.savefig("%s_LF_%s.png" % (n, pos))

@@ -101,16 +101,6 @@ for filepaths, tpl in zip(filepathss, tup):
 
         all_mu_points_index = [*all_mu_points_index, *mu_index]
         all_NF_index = [*all_NF_index, *NF_index[slip_indexes_index]]
-        if tpl[0]=='pre':
-            index[0].append(all_NF_thumb)
-            index[0].append(all_mu_points_thumb)
-            index[0].append(all_NF_index)
-            index[0].append(all_mu_points_index)
-        else:
-            index[1].append(all_NF_thumb)
-            index[1].append(all_mu_points_thumb)
-            index[1].append(all_NF_index)
-            index[1].append(all_mu_points_index)
 
 
         # %% Graphe de détection du glissement pour l'index
@@ -190,8 +180,17 @@ for filepaths, tpl in zip(filepathss, tup):
     k_thumb, n_thumb = gmf.get_mu_fit(all_mu_points_thumb, all_NF_thumb)
     if tpl[0]=='pre':
         values[0,:]=np.array([k_index, n_index, k_thumb, n_thumb])
+        index[0].append(all_NF_thumb)
+        index[0].append(all_mu_points_thumb)
+        index[0].append(all_NF_index)
+        index[0].append(all_mu_points_index)
+
     else:
         values[1,:] = np.array([k_index, n_index, k_thumb, n_thumb])
+        index[1].append(all_NF_thumb)
+        index[1].append(all_mu_points_thumb)
+        index[1].append(all_NF_index)
+        index[1].append(all_mu_points_index)
     # %% Impression de la valeur des variables dans la console
     print("Index: the value of k is %f and n is %f" % (k_index, n_index))
     print("Thumb: the value of k is %f and n is %f" % (k_thumb, n_thumb))
@@ -199,6 +198,7 @@ for filepaths, tpl in zip(filepathss, tup):
     # %% Figure finale pour l'index
 x = np.arange(0.2, 30, 0.02).tolist()
 fig = plt.figure(figsize=[15, 7])
+
 plt.plot(x, values[0][0] * (x ** (values[0][1] - 1)),color=color1,label='index pre')
 plt.plot(index[0][2], index[0][3], linestyle='', marker='.',color=color1,label='index pre')
 plt.plot(x, values[0][2] * (x ** (values[0][3] - 1)),color=color1,linestyle='dashed',label='thumb pre')
@@ -214,9 +214,11 @@ plt.text(5.5,2.0,text,bbox=props,fontsize=17)
 
 plt.ylim([0, 3])
 plt.xlim([0, 17.5])
-plt.title('Coefficient of friction index')
-plt.xlabel('Normal Force [N]')
-plt.ylabel('Static Friction [-]')
+plt.tick_params(axis='x', labelsize=14)
+plt.tick_params(axis='y', labelsize=14)
+
+plt.xlabel('Normal Force [N]',fontsize=14)
+plt.ylabel('Static Friction [-]',fontsize=14)
 plt.legend(prop={'size': 11})
 plt.savefig("coef_GD.png")
 
