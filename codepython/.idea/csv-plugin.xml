@@ -45,7 +45,21 @@
             </Attribute>
           </value>
         </entry>
+        <entry key="\GFonLF\allsubjectsjustpvalueblind.py">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
         <entry key="\JustY\fillbetweennormalize.py">
+          <value>
+            <Attribute>
+              <option name="separator" value="," />
+            </Attribute>
+          </value>
+        </entry>
+        <entry key="\delayGFandLF\allsubjectsjustpvaluebindnobind.py">
           <value>
             <Attribute>
               <option name="separator" value="," />

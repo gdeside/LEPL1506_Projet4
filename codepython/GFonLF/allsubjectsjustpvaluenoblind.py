@@ -11,7 +11,7 @@ import processing_tools as tool
 
 import glm_data_processing as glm
 
-ntrials = [4, 5]  # /!\ changer noms de fichiers
+ntrials = [2, 3]  # /!\ changer noms de fichiers
 positions = ['UR', 'SP', 'UD']
 names = ['GD', 'PDs', 'LH', 'MH']
 colors = ['plum', 'aquamarine', 'aquamarine', 'royalblue', 'royalblue']
@@ -68,7 +68,9 @@ meanlucileGF = np.nanmean(GF[baseline])
 
 fig, (ax1, ax2, ax3) = plt.subplots(nrows=3, ncols=1, figsize=(7, 10))
 tup = (ax1, ax2, ax3)
+file1 = open("statsnoblind", "w")
 for p, ax in zip(positions, tup):
+    file1.write("########################%s######################\n" % positionsdico[p])
     a = -3
     for name in names:
         openarray1 = []
@@ -159,6 +161,10 @@ for p, ax in zip(positions, tup):
         Ttest = sm2.CompareMeans(X1, X2)
         t2, p2 = sc.ttest_ind(openarray1, openarray2)
         Txbis, pvalbis = sc.bartlett(openarray1, openarray2)
+        file1.write(Ttest.summary(usevar='pooled').as_text() + "\n")
+        file1.write("les deux moyennes sont: %f et %f\n" % (np.nanmean(openarray1), np.nanmean(openarray2)))
+        file1.write("p_value pour la variance %f \n" % pvalbis)
+        file1.write("les deux variances sont %f et %f\n" % (np.nanstd(openarray1), np.nanstd(openarray2)))
         box = [np.nanmean(openarray1), np.nanmean(openarray2)]
         box1 = [np.nanstd(openarray1), np.nanstd(openarray2)]
         index = indexsubject[name]
@@ -193,5 +199,6 @@ for p, ax in zip(positions, tup):
     if p == 'UD':
         ax.legend(loc="lower right", prop={'size': 8})
         # ax.set_xlabel('blocs(#)')
-fig.suptitle("Comparaison De la moyenne de la GFmax sur LFmax en condition yeux fermés")
-plt.savefig("errorbar_en_GFonLF_for_allpvalueblind.png")
+fig.suptitle("Comparaison De la moyenne de la GFmax sur LFmax en condition yeux ouverts")
+plt.savefig("errorbar_en_GFonLF_for_allpvaluenoblind.png")
+file1.close()
