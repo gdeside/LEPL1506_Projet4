@@ -66,11 +66,10 @@ GF = glm_df.loc[:, 'GF'].to_numpy()
 meanlucile = np.nanmean(GF[baseline])
 ##
 
-fig, (ax1, ax2, ax3) = plt.subplots(nrows=3, ncols=1, figsize=(7, 10))
-tup = (ax1, ax2, ax3)
+
 file1 = open("statsBNB_delatz", "w")
-for p, ax in zip(positions, tup):
-    file1.write("########################%s######################\n" % positionsdico[p])
+for p in positions:
+   
     a = -3
     openarray1 = []
     openarray2 = []
@@ -149,68 +148,30 @@ for p, ax in zip(positions, tup):
             cycle_ends = ipk[1:] - 1
 
             GFmax = []
+            indexGF=[]
+            LFmax=[]
+            indexLF=[]
             for i in range(len(cycle_starts)):
                 id = np.where((time > time1[cycle_starts[i]]) & (time < time1[cycle_ends[i]]))
                 idbis = np.nanargmax(GF[id])
+                indexGF.append(time[id][idbis])
+                GFmax.append(GF[id][idbis])
                 # print(len(time[id]))
-                if idbis > 250 and idbis + 250 < len(time[id]):
-                    idarray = np.arange(idbis - 250, idbis + 250)
-                elif idbis > 250 and idbis + 250 > len(time[id]):
-                    idarray = np.arange(idbis - 250, len(time[id]))
+                if idbis > 500 and idbis + 500 < len(time[id]):
+                    idarray = np.arange(idbis - 500, idbis + 500)
+                elif idbis > 500 and idbis + 500 > len(time[id]):
+                    idarray = np.arange(idbis - 500, len(time[id]))
                 else:
                     idarray = np.arange(0, idbis + 250)
                 idbis1 = np.nanargmax(LF[id][idarray])
-                if n == 2 or n == 3:
-                    openarray1.append(np.abs(time[id][idbis] - time[id][idarray][idbis1]))
-                    # print(time[id][idbis])
-                    # print(time[id][idarray])
-                    # print(time[id][idarray][np.nanargmax(LF[id][idarray])])
-                if n == 5 or n == 4:
-                    openarray2.append(np.abs(time[id][idbis] - time[id][idarray][idbis1]))
+                indexLF.append(time[id][idarray][idbis1])
+                LFmax.append(LF[id][idarray][idbis1])
+            plt.plot(time,GF,label='GF')
+            plt.plot(time,LF,label='LF')
+            plt.scatter(indexGF,GFmax,label='GF max')
+            plt.scatter(indexLF,LFmax,label='LF max')
+            plt.legend()
+            plt.title("%s en position %s essais %d"%(sujet[name],positionsdico[p],n))
+            plt.show()
+            
 
-        X1 = sm2.DescrStatsW(openarray1)
-        X2 = sm2.DescrStatsW(openarray2)
-        Ttest = sm2.CompareMeans(X1, X2)
-        file1.write(Ttest.summary(usevar='pooled').as_text() + "\n")
-        file1.write("les deux moyennes sont: %f et %f\n" % (np.nanmean(openarray1), np.nanmean(openarray2)))
-        t2, p2 = sc.ttest_ind(openarray1, openarray2)
-        Txbis, pvalbis = sc.bartlett(openarray1, openarray2)
-        box = [np.nanmean(openarray1), np.nanmean(openarray2)]
-        box1 = [np.nanstd(openarray1), np.nanstd(openarray2)]
-        file1.write("p_value pour la variance %f \n" % pvalbis)
-        file1.write("les deux variances sont %f et %f\n" % (np.nanstd(openarray1), np.nanstd(openarray2)))
-        index = indexsubject[name]
-        indexgraph1 = np.linspace(index[0] - 0.25, index[0] + 0.25, 50)
-        plotarray1 = np.zeros(50) + box[0]
-        indexgraph2 = np.linspace(index[1] - 0.25, index[1] + 0.25, 50)
-        plotarray2 = np.zeros(50) + box[1]
-        indexscatter1 = np.zeros(len(openarray1)) + index[0]
-        indexscatter2 = np.zeros(len(openarray2)) + index[1]
-        if ax == ax3:
-            ax.plot(indexgraph1, plotarray1, linestyle='dotted', color=sujetcolor[name],
-                    label=sujet[name])
-            ax.scatter(indexscatter1, openarray1, color=sujetcolor[name], alpha=0.5, s=20)
-            ax.plot(indexgraph2, plotarray2, linestyle='dotted', color=sujetcolor[name])
-            ax.scatter(indexscatter2, openarray2, color=sujetcolor[name], alpha=0.5, s=20)
-            ax.text(index[0] + 0.25, 1.25, 'mean:%s' % transformpvalue(p2), fontsize=13)
-            ax.text(index[0] + 0.25, 1.10, 'std:%s' % transformpvalue(pvalbis), fontsize=13)
-        else:
-            ax.plot(indexgraph1, plotarray1, linestyle='dotted', color=sujetcolor[name])
-            ax.scatter(indexscatter1, openarray1, color=sujetcolor[name], alpha=0.5, s=20)
-            ax.plot(indexgraph2, plotarray2, linestyle='dotted', color=sujetcolor[name])
-            ax.scatter(indexscatter2, openarray2, color=sujetcolor[name], alpha=0.5, s=20)
-            ax.text(index[0] + 0.25, 1.25, 'mean:%s' % transformpvalue(p2), fontsize=13)
-            ax.text(index[0] + 0.25, 1.10, 'std:%s' % transformpvalue(pvalbis), fontsize=13)
-    ax.set_ylim(-0.5, 1.4)
-    ax.set_xlim(0.85, 2.15)
-    ax.set_xticks([1, 2, 3, 4, 5, 6, 7, 8])
-    ax.set_xlim(0.5, 8.5)
-    ax.set_xticklabels(["no blind", 'blind', "no blind", 'blind', "no blind", 'blind', "no blind", 'blind'])
-    ax.set_title("%s" % positionsdico[p], fontweight='bold')
-    ax.set_ylabel("delay[s]")
-    if p == 'UD':
-        ax.legend(loc="lower right", prop={'size': 7})
-        # ax.set_xlabel('blocs(#)')
-fig.suptitle("Comparaison delay entre GFmax/LFmax entre les deux conditions")
-plt.savefig("errorbar_delay_GF_LF_for_allpvaluebindnobind.png")
-file1.close()
