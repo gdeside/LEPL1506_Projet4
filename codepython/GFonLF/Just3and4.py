@@ -10,7 +10,7 @@ import coda_tools as coda
 import processing_tools as tool
 import glm_data_processing as glm
 
-ntrials = [4, 5]  # /!\ changer noms de fichiers
+ntrials = [2,3,4, 5]  # /!\ changer noms de fichiers
 positions = ['UR', 'SP', 'UD']
 names = ['GD', 'PDs', 'LH', 'MH']
 colors = ['plum', 'aquamarine', 'aquamarine', 'royalblue', 'royalblue']
@@ -60,7 +60,7 @@ meanlucileGF = np.nanmean(GF[baseline])
 
 fig, (ax1, ax2, ax3) = plt.subplots(nrows=3, ncols=1, figsize=(7, 10))
 tup = (ax1, ax2, ax3)
-file1 = open("statsblindall", "w")
+file1 = open("statsxhangemet", "w")
 for p, ax in zip(positions, tup):
     file1.write("########################%s######################\n" % positionsdico[p])
     arrayopenall = []
@@ -141,9 +141,9 @@ for p, ax in zip(positions, tup):
                     if n == 5 or n == 3:
                         ecart.append(np.nanmax(GF[id]) / np.nanmax(LF[id]))
 
-                if n == 2 or n == 4:
+                if n == 2 or n == 3:
                     arrayopen.append(np.nanmean(ecart))
-                if n == 5 or n == 3:
+                if n == 5 or n == 4:
                     arrayclose.append(np.nanmean(ecart))
 
         arraycloseall.append(np.nanmean(arrayclose))

@@ -68,7 +68,9 @@ meanlucile = np.nanmean(GF[baseline])
 
 fig, (ax1, ax2, ax3) = plt.subplots(nrows=3, ncols=1, figsize=(7, 10))
 tup = (ax1, ax2, ax3)
+file1 = open("statschgtdecondition", "w")
 for p, ax in zip(positions, tup):
+    file1.write("########################%s######################\n" % positionsdico[p])
     a = -3
     openarray1 = []
     openarray2 = []
@@ -150,15 +152,19 @@ for p, ax in zip(positions, tup):
             for i in range(len(cycle_starts)):
                 id = np.where((time > time1[cycle_starts[i]]) & (time < time1[cycle_ends[i]]))
                 if n == 2 or n == 3:
-                    openarray1.append(np.nanmax(GF[id])/np.nanmax(LF[id]))
+                    openarray1.append(np.nanmax(GF[id]) / np.nanmax(LF[id]))
                 if n == 5 or n == 4:
-                    openarray2.append(np.nanmax(GF[id])/np.nanmax(LF[id]))
+                    openarray2.append(np.nanmax(GF[id]) / np.nanmax(LF[id]))
 
         X1 = sm2.DescrStatsW(openarray1)
         X2 = sm2.DescrStatsW(openarray2)
         Ttest = sm2.CompareMeans(X1, X2)
         t2, p2 = sc.ttest_ind(openarray1, openarray2)
         Txbis, pvalbis = sc.bartlett(openarray1, openarray2)
+        file1.write(Ttest.summary(usevar='pooled').as_text() + "\n")
+        file1.write("les deux moyennes sont: %f et %f\n" % (np.nanmean(openarray1), np.nanmean(openarray2)))
+        file1.write("p_value pour la variance %f \n" % pvalbis)
+        file1.write("les deux variances sont %f et %f\n" % (np.nanstd(openarray1), np.nanstd(openarray2)))
         box = [np.nanmean(openarray1), np.nanmean(openarray2)]
         box1 = [np.nanstd(openarray1), np.nanstd(openarray2)]
         index = indexsubject[name]
@@ -187,11 +193,12 @@ for p, ax in zip(positions, tup):
     ax.set_xlim(0.85, 2.15)
     ax.set_xticks([1, 2, 3, 4, 5, 6, 7, 8])
     ax.set_xlim(0.5, 8.5)
-    ax.set_xticklabels(["no blind", 'blind',"no blind", 'blind',"no blind", 'blind',"no blind",'blind'])
-    ax.set_title("%s" % positionsdico[p],fontweight='bold')
+    ax.set_xticklabels(["no blind", 'blind', "no blind", 'blind', "no blind", 'blind', "no blind", 'blind'])
+    ax.set_title("%s" % positionsdico[p], fontweight='bold')
     ax.set_ylabel("GF/LF")
     if p == 'UD':
-        ax.legend(loc="center left",prop={'size': 8})
+        ax.legend(loc="center left", prop={'size': 8})
         # ax.set_xlabel('blocs(#)')
 fig.suptitle("Comparaison De la moyenne de la GFmax/LFmax entre les deux conditions")
 plt.savefig("errorbar_en_GFonLF_for_allpvaluebindnobind.png")
+file1.close()

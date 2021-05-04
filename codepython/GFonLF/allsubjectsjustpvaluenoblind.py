@@ -152,9 +152,9 @@ for p, ax in zip(positions, tup):
             for i in range(len(cycle_starts)):
                 id = np.where((time > time1[cycle_starts[i]]) & (time < time1[cycle_ends[i]]))
                 if n == 2 or n == 4:
-                    openarray1.append(np.nanmax(GF[id])/np.nanmax(LF[id]))
+                    openarray1.append(np.nanmax(GF[id]) / np.nanmax(LF[id]))
                 if n == 5 or n == 3:
-                    openarray2.append(np.nanmax(GF[id])/np.nanmax(LF[id]))
+                    openarray2.append(np.nanmax(GF[id]) / np.nanmax(LF[id]))
 
         X1 = sm2.DescrStatsW(openarray1)
         X2 = sm2.DescrStatsW(openarray2)
@@ -194,7 +194,7 @@ for p, ax in zip(positions, tup):
     ax.set_xticks([1, 2, 3, 4, 5, 6, 7, 8])
     ax.set_xlim(0.5, 8.5)
     ax.set_xticklabels(["1er bloc", '2em bloc', "1er bloc", '2em bloc', "1er bloc", '2em bloc', "1er bloc", '2em bloc'])
-    ax.set_title("%s" % positionsdico[p],fontweight='bold')
+    ax.set_title("%s" % positionsdico[p], fontweight='bold')
     ax.set_ylabel("GF/LF")
     if p == 'UD':
         ax.legend(loc="lower right", prop={'size': 8})
